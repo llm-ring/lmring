@@ -21,7 +21,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@arcjet/next": "1.0.0-beta.13",
+    "@arcjet/next": "1.0.0-beta.15",
     "@hookform/resolvers": "^5.2.2",
     "@logtape/logtape": "^1.1.1",
     "@lmring/auth": "workspace:*",
