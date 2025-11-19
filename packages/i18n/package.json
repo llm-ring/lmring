@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
-    "@types/node": "^24.9.1",
-    "typescript": "^5.9.3"
+    "@types/node": "24.9.2",
+    "typescript": "5.9.3"
   }
 }
