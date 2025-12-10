@@ -29,7 +29,7 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@evilmartians/lefthook": "^2.0.9",
-    "knip": "^5.72.0",
+    "knip": "^5.73.0",
     "turbo": "^2.6.3"
   },
   "packageManager": "pnpm@10.25.0"
