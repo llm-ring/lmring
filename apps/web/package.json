@@ -62,7 +62,7 @@
     "@playwright/test": "^1.57.0",
     "@spotlightjs/spotlight": "^4.7.2",
     "@tailwindcss/postcss": "^4.1.17",
-    "@types/node": "^24.10.2",
+    "@types/node": "^24.10.3",
     "@types/react": "19.2.7",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/browser-playwright": "^4.0.15",
