@@ -14,7 +14,29 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "DATABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "ENCRYPTION_KEY",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "DEPLOYMENT_MODE",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "GITHUB_CLIENT_ID",
+        "GITHUB_CLIENT_SECRET",
+        "ANALYZE",
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "NEXT_PUBLIC_POSTHOG_KEY",
+        "NEXT_PUBLIC_POSTHOG_HOST",
+        "NEXT_PUBLIC_SENTRY_DSN",
+        "SENTRY_ORGANIZATION",
+        "SENTRY_PROJECT",
+        "SENTRY_AUTH_TOKEN",
+        "ARCJET_KEY"
+      ]
     },
     "start": {
       "dependsOn": ["build"],
