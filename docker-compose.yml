@@ -1,0 +1,84 @@
+# Docker Compose for LMRing Self-hosted Deployment
+#
+# Usage:
+#   1. Copy .env.example to .env and configure
+#   2. Run: docker compose up -d
+#   3. Run migrations: docker compose exec app pnpm db:migrate
+#   4. Access: http://localhost:3000
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:17-alpine
+    container_name: lmring-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-lmring}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-lmring}
+      POSTGRES_DB: ${POSTGRES_DB:-lmring}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-lmring} -d ${POSTGRES_DB:-lmring}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - lmring-network
+
+  # LMRing Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DEPLOYMENT_MODE: selfhost
+        NEXT_PUBLIC_DEPLOYMENT_MODE: selfhost
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    container_name: lmring-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      # Deployment Mode
+      DEPLOYMENT_MODE: selfhost
+      NEXT_PUBLIC_DEPLOYMENT_MODE: selfhost
+
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-lmring}:${POSTGRES_PASSWORD:-lmring}@postgres:5432/${POSTGRES_DB:-lmring}
+
+      # Better Auth (required)
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+
+      # Encryption (required)
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+
+      # OAuth (optional - leave empty to disable)
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+
+      # App URL
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+
+      # Optional monitoring
+      NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN:-}
+      NEXT_PUBLIC_SENTRY_DISABLED: ${NEXT_PUBLIC_SENTRY_DISABLED:-true}
+      NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY:-}
+      NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST:-}
+    networks:
+      - lmring-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  lmring-network:
+    driver: bridge

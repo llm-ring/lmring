@@ -6,6 +6,7 @@ import '@lmring/env/config';
 import { env } from '@lmring/env';
 
 const baseConfig: NextConfig = {
+  output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
   transpilePackages: [
