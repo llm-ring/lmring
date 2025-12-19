@@ -30,7 +30,7 @@
     "@ai-sdk/provider": "^2.0.0",
     "@ai-sdk/provider-utils": "^3.0.19",
     "@ai-sdk/xai": "^2.0.41",
-    "@openrouter/ai-sdk-provider": "^1.5.3",
+    "@openrouter/ai-sdk-provider": "^1.5.4",
     "ai": "^5.0.115",
     "zod": "^4.1.13"
   },

@@ -244,8 +244,8 @@ importers:
         specifier: workspace:*
         version: link:../model-depot
       '@openrouter/ai-sdk-provider':
-        specifier: ^1.5.3
-        version: 1.5.3(ai@5.0.115(zod@4.1.13))(zod@4.1.13)
+        specifier: ^1.5.4
+        version: 1.5.4(ai@5.0.115(zod@4.1.13))(zod@4.1.13)
       ai:
         specifier: ^5.0.115
         version: 5.0.115(zod@4.1.13)
@@ -1908,16 +1908,12 @@ packages:
     resolution: {integrity: sha512-ALxKMNFFJQJV1Z2OMVTV+q7EbKHhnTAPcTgkgHeXCNdW5nFExoXuwusZLS4Zv2o83j9UoDx1R/CSX7QZVgEHTA==}
     engines: {node: '>=18.0.0'}
 
-  '@openrouter/ai-sdk-provider@1.5.3':
-    resolution: {integrity: sha512-7SZmmLdp0x1wwuwZARn5R19ZSySHmTiUEM8IvN7O5r3ZH4drI1//BsLpfw56YFsBXu34VRtQzyvko1FLIcgtRg==}
+  '@openrouter/ai-sdk-provider@1.5.4':
+    resolution: {integrity: sha512-xrSQPUIH8n9zuyYZR0XK7Ba0h2KsjJcMkxnwaYfmv13pKs3sDkjPzVPPhlhzqBGddHb5cFEwJ9VFuFeDcxCDSw==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@toon-format/toon': ^2.0.0
       ai: ^5.0.0
       zod: ^3.24.1 || ^v4
-    peerDependenciesMeta:
-      '@toon-format/toon':
-        optional: true
 
   '@openrouter/sdk@0.1.27':
     resolution: {integrity: sha512-RH//L10bSmc81q25zAZudiI4kNkLgxF2E+WU42vghp3N6TEvZ6F0jK7uT3tOxkEn91gzmMw9YVmDENy7SJsajQ==}
@@ -10438,7 +10434,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@openrouter/ai-sdk-provider@1.5.3(ai@5.0.115(zod@4.1.13))(zod@4.1.13)':
+  '@openrouter/ai-sdk-provider@1.5.4(ai@5.0.115(zod@4.1.13))(zod@4.1.13)':
     dependencies:
       '@openrouter/sdk': 0.1.27
       ai: 5.0.115(zod@4.1.13)
