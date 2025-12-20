@@ -31,7 +31,7 @@
     "@ai-sdk/provider-utils": "^3.0.19",
     "@ai-sdk/xai": "^2.0.42",
     "@openrouter/ai-sdk-provider": "^1.5.4",
-    "ai": "^5.0.115",
+    "ai": "^5.0.116",
     "zod": "^4.1.13"
   },
   "devDependencies": {
