@@ -18,8 +18,8 @@ importers:
         specifier: ^20.2.0
         version: 20.2.0
       '@evilmartians/lefthook':
-        specifier: ^2.0.12
-        version: 2.0.12
+        specifier: ^2.0.13
+        version: 2.0.13
       knip:
         specifier: ^5.77.0
         version: 5.77.0(@types/node@25.0.3)(typescript@5.9.3)
@@ -1559,8 +1559,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@evilmartians/lefthook@2.0.12':
-    resolution: {integrity: sha512-SSsBw9f1ow0rz3tKhQYcalIO2V+VOcZGTFg7CkYAUVTW4q87KORfpjehJZ3bpSYxLaDV8Xkv0gaXbi9pr5Br/w==}
+  '@evilmartians/lefthook@2.0.13':
+    resolution: {integrity: sha512-Kpsd8NNQw4PrxP41OqwvM0oAP8y70Fslir7uU9fUBdl6JcGGpKlFNlFj87/5OJO95VHxKm8rFvg5mbkv4cCTFw==}
     cpu: [x64, arm64, ia32]
     os: [darwin, linux, win32]
     hasBin: true
@@ -10618,7 +10618,7 @@ snapshots:
   '@esbuild/win32-x64@0.27.2':
     optional: true
 
-  '@evilmartians/lefthook@2.0.12': {}
+  '@evilmartians/lefthook@2.0.13': {}
 
   '@faker-js/faker@10.1.0': {}
 
