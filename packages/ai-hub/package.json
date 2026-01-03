@@ -31,7 +31,7 @@
     "@ai-sdk/xai": "^3.0.3",
     "@lmring/model-depot": "workspace:*",
     "@openrouter/ai-sdk-provider": "^1.5.4",
-    "ai": "^6.0.5",
+    "ai": "^6.0.6",
     "zod": "^4.2.1"
   },
   "devDependencies": {
