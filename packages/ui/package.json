@@ -130,7 +130,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "peerDependencies": {
-    "react": "^19.2.4"
+    "react": "^19.2.5"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",

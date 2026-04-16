@@ -19,7 +19,7 @@
     "react-i18next": "^17.0.2"
   },
   "peerDependencies": {
-    "react": "^19.2.4"
+    "react": "^19.2.5"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
