@@ -40,7 +40,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "culori": "^4.0.1"
+    "culori": "^4.0.2"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",

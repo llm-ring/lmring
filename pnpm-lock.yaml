@@ -586,7 +586,7 @@ importers:
   packages/theme:
     dependencies:
       culori:
-        specifier: ^4.0.1
+        specifier: ^4.0.2
         version: 4.0.2
     devDependencies:
       '@lmring/typescript-config':
