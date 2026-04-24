@@ -27,7 +27,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@better-auth/drizzle-adapter": "^1.6.7",
+    "@better-auth/drizzle-adapter": "^1.6.8",
     "@lmring/database": "workspace:*",
     "better-auth": "^1.6.8",
     "drizzle-orm": "^0.45.2",
