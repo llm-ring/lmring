@@ -33,7 +33,7 @@
     "@lmring/video-runtime": "workspace:*",
     "@lobehub/fluent-emoji": "^4.1.0",
     "@lobehub/icons": "^5.5.4",
-    "@lobehub/ui": "^5.9.5",
+    "@lobehub/ui": "^5.10.0",
     "@logtape/logtape": "^2.0.5",
     "@sentry/nextjs": "^10.50.0",
     "@supabase/ssr": "^0.10.2",
