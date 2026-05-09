@@ -29,7 +29,7 @@
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.6.9",
     "@lmring/database": "workspace:*",
-    "better-auth": "^1.6.9",
+    "better-auth": "^1.6.10",
     "drizzle-orm": "^0.45.2",
     "resend": "^6.12.3"
   },
