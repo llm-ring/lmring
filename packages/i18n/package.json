@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "i18next": "^26.1.0",
-    "react-i18next": "^17.0.7"
+    "react-i18next": "^17.0.8"
   },
   "peerDependencies": {
     "react": "^19.2.4"
