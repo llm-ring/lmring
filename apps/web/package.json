@@ -41,7 +41,7 @@
     "@tanstack/react-table": "^8.21.3",
     "@vercel/sandbox": "^1.10.2",
     "ahooks": "^3.9.7",
-    "fflate": "^0.8.2",
+    "fflate": "^0.8.3",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.16.0",
     "nanoid": "^5.1.11",
