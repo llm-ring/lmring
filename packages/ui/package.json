@@ -123,7 +123,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@tsdown/css": "0.22.0",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@vitest/coverage-v8": "^4.1.6",
     "happy-dom": "20.9.0",
     "react": "^19.2.6",
