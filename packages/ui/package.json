@@ -109,7 +109,7 @@
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
     "radix-ui": "^1.4.3",
-    "react-resizable-panels": "^4.11.1",
+    "react-resizable-panels": "^4.11.2",
     "rehype-harden": "^1.1.8",
     "streamdown": "^2.5.0",
     "tailwind-merge": "^3.6.0"
