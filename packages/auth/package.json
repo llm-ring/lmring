@@ -40,7 +40,7 @@
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
-    "@types/react": "^19.2.16",
+    "@types/react": "^19.2.17",
     "@vitest/coverage-v8": "^4.1.8",
     "react": "^19.2.7",
     "typescript": "^6.0.3",
