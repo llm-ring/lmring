@@ -27,12 +27,12 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@better-auth/core": "^1.6.17",
-    "@better-auth/drizzle-adapter": "^1.6.17",
+    "@better-auth/core": "^1.6.19",
+    "@better-auth/drizzle-adapter": "^1.6.19",
     "@lmring/database": "workspace:*",
-    "better-auth": "^1.6.17",
+    "better-auth": "^1.6.19",
     "drizzle-orm": "^0.45.2",
-    "resend": "^6.12.4"
+    "resend": "^6.14.0"
   },
   "peerDependencies": {
     "react": "^19.2.7"
@@ -41,9 +41,9 @@
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
     "@types/react": "^19.2.17",
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.9",
     "react": "^19.2.7",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }

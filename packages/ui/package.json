@@ -99,16 +99,16 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@radix-ui/react-collapsible": "^1.1.13",
-    "@radix-ui/react-dialog": "^1.1.16",
-    "@radix-ui/react-scroll-area": "^1.2.11",
+    "@radix-ui/react-collapsible": "^1.1.14",
+    "@radix-ui/react-dialog": "^1.1.17",
+    "@radix-ui/react-scroll-area": "^1.2.12",
     "@radix-ui/react-use-controllable-state": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "framer-motion": "^12.40.0",
-    "lucide-react": "^1.17.0",
-    "radix-ui": "^1.5.0",
+    "lucide-react": "^1.20.0",
+    "radix-ui": "^1.6.0",
     "react-resizable-panels": "^4.11.2",
     "rehype-harden": "^1.1.8",
     "streamdown": "^2.5.0",
@@ -122,13 +122,13 @@
     "@lmring/vitest-config": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@tsdown/css": "0.22.2",
+    "@tsdown/css": "0.22.3",
     "@types/react": "^19.2.17",
-    "@vitest/coverage-v8": "^4.1.8",
-    "happy-dom": "20.10.2",
+    "@vitest/coverage-v8": "^4.1.9",
+    "happy-dom": "20.10.6",
     "react": "^19.2.7",
-    "tsdown": "0.22.2",
+    "tsdown": "0.22.3",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }
