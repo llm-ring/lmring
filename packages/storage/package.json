@@ -12,14 +12,14 @@
         "test": "vitest run"
     },
     "dependencies": {
-        "@aws-sdk/client-s3": "^3.1071.0",
-        "@aws-sdk/s3-request-presigner": "^3.1071.0",
+        "@aws-sdk/client-s3": "^3.1073.0",
+        "@aws-sdk/s3-request-presigner": "^3.1073.0",
         "@supabase/supabase-js": "^2.108.2"
     },
     "devDependencies": {
         "@lmring/typescript-config": "workspace:*",
         "@lmring/vitest-config": "workspace:*",
-        "@types/node": "^25.9.3",
+        "@types/node": "^26.0.0",
         "@vitest/coverage-v8": "4.1.9",
         "typescript": "^6.0.3",
         "vitest": "^4.1.9"
