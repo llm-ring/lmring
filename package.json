@@ -32,8 +32,8 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.1",
     "@changesets/cli": "^2.31.0",
-    "@commitlint/cli": "^21.0.2",
-    "@commitlint/config-conventional": "^21.0.2",
+    "@commitlint/cli": "^21.1.0",
+    "@commitlint/config-conventional": "^21.1.0",
     "husky": "^9.1.7",
     "knip": "^6.18.0",
     "lint-staged": "^17.0.8",
