@@ -1,4 +1,4 @@
-import type { LanguageModelV3, LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4, LanguageModelV4Middleware } from '@ai-sdk/provider';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ProviderBuilder } from '../../providers/builder';
 import { registry } from '../../providers/registry';
@@ -9,8 +9,8 @@ vi.mock('ai', () => ({
   wrapLanguageModel: vi.fn(({ model }) => model),
 }));
 
-const createMockLanguageModel = (): LanguageModelV3 => ({
-  specificationVersion: 'v3',
+const createMockLanguageModel = (): LanguageModelV4 => ({
+  specificationVersion: 'v4',
   provider: 'mock',
   modelId: 'mock-model',
   supportedUrls: {},
@@ -295,7 +295,7 @@ describe('ModelResolver', () => {
         .spyOn(ProviderBuilder, 'createProviderInstance')
         .mockReturnValue(mockInstance);
 
-      const middleware: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+      const middleware: LanguageModelV4Middleware = { specificationVersion: 'v4' };
       resolver.resolve('openai>gpt-4', undefined, { middlewares: [middleware] });
       resolver.resolve('openai>gpt-4', undefined, { middlewares: [middleware] });
 
@@ -353,7 +353,7 @@ describe('ModelResolver', () => {
       });
       vi.spyOn(ProviderBuilder, 'createProviderInstance').mockReturnValue(mockInstance);
 
-      const middleware: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+      const middleware: LanguageModelV4Middleware = { specificationVersion: 'v4' };
       const result = resolver.resolve('openai>gpt-4', undefined, {
         middlewares: [middleware],
       });

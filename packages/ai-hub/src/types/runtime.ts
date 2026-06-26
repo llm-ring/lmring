@@ -1,5 +1,5 @@
-import type { LanguageModelV3Middleware } from '@ai-sdk/provider';
-import type { GenerateTextResult, ModelMessage, StreamTextResult, ToolSet } from 'ai';
+import type { LanguageModelV4Middleware } from '@ai-sdk/provider';
+import type { generateText, ModelMessage, streamText } from 'ai';
 import type { AiPlugin } from './plugin';
 import type { ProviderInstance } from './provider';
 
@@ -10,19 +10,22 @@ type ProviderLike = {
   chat?: ProviderInstance['languageModel'];
 };
 
+type GenerateTextResult = Awaited<ReturnType<typeof generateText>>;
+type StreamTextResult = ReturnType<typeof streamText>;
+
 type ComparisonResultPayload =
-  | GenerateTextResult<ToolSet, never>
-  | StreamTextResult<ToolSet, never>
+  | GenerateTextResult
+  | StreamTextResult
   | {
       text: string;
-      usage?: Awaited<StreamTextResult<ToolSet, never>['usage']>;
+      usage?: Awaited<StreamTextResult['usage']>;
     };
 
 export interface RuntimeConfig {
   providerId: string;
   providerOptions?: Record<string, unknown>;
   plugins?: AiPlugin[];
-  middlewares?: LanguageModelV3Middleware[];
+  middlewares?: LanguageModelV4Middleware[];
 }
 
 export interface StreamTextParams {

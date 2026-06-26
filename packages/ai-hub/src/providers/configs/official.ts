@@ -10,8 +10,8 @@ import {
   OFFICIAL_PROVIDER_METADATA,
   PROVIDER_ENDPOINTS,
 } from '@lmring/model-depot/providers';
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import type { ProviderConfig, ProviderInstance, ProviderOptions } from '../../types/provider';
+import { createOpenRouter } from '../openrouter-compat';
 
 type ProviderLike = {
   languageModel: ProviderInstance['languageModel'];

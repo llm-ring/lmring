@@ -1,13 +1,13 @@
-import type { LanguageModelV3, LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4, LanguageModelV4Middleware } from '@ai-sdk/provider';
 import { wrapLanguageModel } from 'ai';
 
 /**
  * Wraps a language model with middlewares
  */
 export function wrapWithMiddlewares(
-  model: LanguageModelV3,
-  middlewares: LanguageModelV3Middleware | LanguageModelV3Middleware[],
-): LanguageModelV3 {
+  model: LanguageModelV4,
+  middlewares: LanguageModelV4Middleware | LanguageModelV4Middleware[],
+): LanguageModelV4 {
   if (Array.isArray(middlewares)) {
     // Apply middlewares in order
     let wrappedModel = model;
@@ -35,11 +35,11 @@ export function createLoggingMiddleware(
     logOutput?: boolean;
     logger?: (message: string, data?: unknown) => void;
   } = {},
-): LanguageModelV3Middleware {
+): LanguageModelV4Middleware {
   const { logInput = true, logger = console.log } = options;
 
   return {
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     transformParams: async ({ params }) => {
       if (logInput) {
         logger('Model input:', params);
@@ -59,9 +59,9 @@ export function createMetricsMiddleware(
     completionTokens?: number;
     totalTokens?: number;
   }) => void,
-): LanguageModelV3Middleware {
+): LanguageModelV4Middleware {
   return {
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     wrapGenerate: async ({ doGenerate }) => {
       const startTime = Date.now();
       const result = await doGenerate();
@@ -97,7 +97,7 @@ export function createRetryMiddleware(
     retryDelay?: number;
     shouldRetry?: (error: Error) => boolean;
   } = {},
-): LanguageModelV3Middleware {
+): LanguageModelV4Middleware {
   const {
     maxRetries = 3,
     retryDelay = 1000,
@@ -105,7 +105,7 @@ export function createRetryMiddleware(
   } = options;
 
   return {
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     wrapGenerate: async ({ doGenerate }) => {
       let lastError: Error | undefined;
 
@@ -133,10 +133,10 @@ export function createRetryMiddleware(
  * Composes multiple middlewares into one
  */
 export function composeMiddlewares(
-  ...middlewares: LanguageModelV3Middleware[]
-): LanguageModelV3Middleware {
-  type GenerateWrapper = NonNullable<LanguageModelV3Middleware['wrapGenerate']>;
-  type StreamWrapper = NonNullable<LanguageModelV3Middleware['wrapStream']>;
+  ...middlewares: LanguageModelV4Middleware[]
+): LanguageModelV4Middleware {
+  type GenerateWrapper = NonNullable<LanguageModelV4Middleware['wrapGenerate']>;
+  type StreamWrapper = NonNullable<LanguageModelV4Middleware['wrapStream']>;
   type GenerateOptions = Parameters<GenerateWrapper>[0];
   type StreamOptions = Parameters<StreamWrapper>[0];
   type GenerateHandler = (options: GenerateOptions) => ReturnType<GenerateWrapper>;
@@ -175,7 +175,7 @@ export function composeMiddlewares(
   );
 
   return {
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     transformParams: async ({ type, params, model }) => {
       let result = params;
 

@@ -1,4 +1,4 @@
-import type { LanguageModelV3, LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4, LanguageModelV4Middleware } from '@ai-sdk/provider';
 import { generateText as aiGenerateText, streamText as aiStreamText, Output } from 'ai';
 import type { AiPlugin, PluginContext } from '../../types/plugin';
 import type { ProviderInstance } from '../../types/provider';
@@ -19,7 +19,7 @@ type ProviderLike = {
   chat?: ProviderInstance['languageModel'];
 };
 
-type ProviderSource = ProviderInstance | LanguageModelV3 | ProviderLike;
+type ProviderSource = ProviderInstance | LanguageModelV4 | ProviderLike;
 
 type StreamTextResponse = Awaited<ReturnType<typeof aiStreamText>>;
 type GenerateTextResponse = Awaited<ReturnType<typeof aiGenerateText>>;
@@ -32,12 +32,12 @@ type StreamObjectResponse = StreamTextResponse;
 export class RuntimeExecutor {
   private engine: PluginEngine;
   private providerId: string;
-  private middlewares: LanguageModelV3Middleware[];
+  private middlewares: LanguageModelV4Middleware[];
 
   constructor(
     private provider: ProviderSource, // Support both ProviderInstance and raw provider
     plugins: AiPlugin[] = [],
-    middlewares: LanguageModelV3Middleware[] = [],
+    middlewares: LanguageModelV4Middleware[] = [],
   ) {
     this.engine = new PluginEngine(plugins);
     this.middlewares = middlewares;
@@ -54,7 +54,7 @@ export class RuntimeExecutor {
     }
   }
 
-  private resolveModel(modelId: string): LanguageModelV3 {
+  private resolveModel(modelId: string): LanguageModelV4 {
     if (!this.provider) {
       throw new ModelResolutionError(modelId, this.providerId, 'Provider not initialized');
     }
@@ -93,7 +93,7 @@ export class RuntimeExecutor {
     params: StreamTextParams,
     options?: {
       plugins?: AiPlugin[];
-      middlewares?: LanguageModelV3Middleware[];
+      middlewares?: LanguageModelV4Middleware[];
     },
   ): Promise<StreamTextResponse> {
     const context = this.createContext(params.model, 'streamText');
@@ -127,13 +127,6 @@ export class RuntimeExecutor {
         return aiStreamText({
           model: wrappedModel,
           ...restParams,
-          experimental_telemetry: {
-            isEnabled: true,
-            metadata: {
-              providerId: this.providerId,
-              modelId,
-            },
-          },
         });
       },
       context,
@@ -144,7 +137,7 @@ export class RuntimeExecutor {
     params: GenerateTextParams,
     options?: {
       plugins?: AiPlugin[];
-      middlewares?: LanguageModelV3Middleware[];
+      middlewares?: LanguageModelV4Middleware[];
     },
   ): Promise<GenerateTextResponse> {
     const context = this.createContext(params.model, 'generateText');
@@ -176,13 +169,6 @@ export class RuntimeExecutor {
         return aiGenerateText({
           model: wrappedModel,
           ...restParams,
-          experimental_telemetry: {
-            isEnabled: true,
-            metadata: {
-              providerId: this.providerId,
-              modelId,
-            },
-          },
         });
       },
       context,
@@ -193,7 +179,7 @@ export class RuntimeExecutor {
     params: GenerateObjectParams<T>,
     options?: {
       plugins?: AiPlugin[];
-      middlewares?: LanguageModelV3Middleware[];
+      middlewares?: LanguageModelV4Middleware[];
     },
   ): Promise<GenerateObjectResponse> {
     const context = this.createContext(params.model, 'generateObject');
@@ -234,13 +220,6 @@ export class RuntimeExecutor {
             schema: schema as Parameters<typeof Output.object>[0]['schema'],
           }),
           ...restParams,
-          experimental_telemetry: {
-            isEnabled: true,
-            metadata: {
-              providerId: this.providerId,
-              modelId,
-            },
-          },
         });
       },
       context,
@@ -251,7 +230,7 @@ export class RuntimeExecutor {
     params: StreamObjectParams<T>,
     options?: {
       plugins?: AiPlugin[];
-      middlewares?: LanguageModelV3Middleware[];
+      middlewares?: LanguageModelV4Middleware[];
     },
   ): Promise<StreamObjectResponse> {
     const context = this.createContext(params.model, 'streamObject');
@@ -292,13 +271,6 @@ export class RuntimeExecutor {
             schema: schema as Parameters<typeof Output.object>[0]['schema'],
           }),
           ...restParams,
-          experimental_telemetry: {
-            isEnabled: true,
-            metadata: {
-              providerId: this.providerId,
-              modelId,
-            },
-          },
         });
       },
       context,
@@ -344,11 +316,11 @@ export class RuntimeExecutor {
     return this.isProviderLike(provider) && typeof (provider as ProviderLike).chat === 'function';
   }
 
-  private isLanguageModel(provider: ProviderSource): provider is LanguageModelV3 {
+  private isLanguageModel(provider: ProviderSource): provider is LanguageModelV4 {
     return (
       typeof provider === 'object' &&
       provider !== null &&
-      typeof (provider as LanguageModelV3).doGenerate === 'function'
+      typeof (provider as LanguageModelV4).doGenerate === 'function'
     );
   }
 }

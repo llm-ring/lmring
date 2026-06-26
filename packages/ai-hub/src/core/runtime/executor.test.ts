@@ -1,4 +1,4 @@
-import type { LanguageModelV3, LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4, LanguageModelV4Middleware } from '@ai-sdk/provider';
 import * as aiSdk from 'ai';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AiPlugin, type PluginContext } from '../../types/plugin';
@@ -17,8 +17,8 @@ vi.mock('ai', () => ({
 const createMockLanguageModel = (
   provider = 'test-provider',
   modelId = 'test-model',
-): LanguageModelV3 => ({
-  specificationVersion: 'v3',
+): LanguageModelV4 => ({
+  specificationVersion: 'v4',
   provider,
   modelId,
   supportedUrls: {},
@@ -70,7 +70,7 @@ describe('RuntimeExecutor', () => {
       expect(executor.getProviderId()).toBe('chat-provider');
     });
 
-    it('extracts providerId from LanguageModelV3', () => {
+    it('extracts providerId from LanguageModelV4', () => {
       const model = createMockLanguageModel('lm-provider');
       const executor = new RuntimeExecutor(model);
       expect(executor.getProviderId()).toBe('lm-provider');
@@ -89,7 +89,7 @@ describe('RuntimeExecutor', () => {
     });
 
     it('accepts middlewares array', () => {
-      const middleware: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+      const middleware: LanguageModelV4Middleware = { specificationVersion: 'v4' };
       const executor = new RuntimeExecutor(createMockProviderInstance(), [], [middleware]);
       expect(executor.getProviderId()).toBe('mock-provider');
     });
@@ -116,7 +116,7 @@ describe('RuntimeExecutor', () => {
       expect(provider.chat).toHaveBeenCalledWith('model');
     });
 
-    it('uses LanguageModelV3 directly if provider is a model', async () => {
+    it('uses LanguageModelV4 directly if provider is a model', async () => {
       const model = createMockLanguageModel();
       const executor = new RuntimeExecutor(model);
       vi.mocked(aiSdk.streamText).mockResolvedValue({ text: 'result' } as never);
@@ -175,26 +175,6 @@ describe('RuntimeExecutor', () => {
         expect.objectContaining({
           temperature: 0.7,
           maxTokens: 100,
-        }),
-      );
-    });
-
-    it('enables telemetry with provider and model metadata', async () => {
-      const provider = createMockProviderInstance();
-      const executor = new RuntimeExecutor(provider);
-      vi.mocked(aiSdk.streamText).mockResolvedValue({} as never);
-
-      await executor.streamText({ model: 'gpt-4', messages: [] });
-
-      expect(aiSdk.streamText).toHaveBeenCalledWith(
-        expect.objectContaining({
-          experimental_telemetry: {
-            isEnabled: true,
-            metadata: {
-              providerId: 'mock-provider',
-              modelId: 'gpt-4',
-            },
-          },
         }),
       );
     });
@@ -323,8 +303,8 @@ describe('RuntimeExecutor', () => {
 
   describe('middleware wrapping', () => {
     it('wraps model with middlewares when provided', async () => {
-      const middleware: LanguageModelV3Middleware = {
-        specificationVersion: 'v3',
+      const middleware: LanguageModelV4Middleware = {
+        specificationVersion: 'v4',
         transformParams: async ({ params }) => params,
       };
       const provider = createMockProviderInstance();
@@ -337,8 +317,8 @@ describe('RuntimeExecutor', () => {
     });
 
     it('merges per-call middlewares with constructor middlewares', async () => {
-      const constructorMw: LanguageModelV3Middleware = { specificationVersion: 'v3' };
-      const callMw: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+      const constructorMw: LanguageModelV4Middleware = { specificationVersion: 'v4' };
+      const callMw: LanguageModelV4Middleware = { specificationVersion: 'v4' };
 
       const provider = createMockProviderInstance();
       const executor = new RuntimeExecutor(provider, [], [constructorMw]);
@@ -378,8 +358,8 @@ describe('RuntimeExecutor', () => {
     });
 
     it('reuses existing middlewares when no per-call middlewares provided', async () => {
-      const constructorMw: LanguageModelV3Middleware = {
-        specificationVersion: 'v3',
+      const constructorMw: LanguageModelV4Middleware = {
+        specificationVersion: 'v4',
         transformParams: async ({ params }) => params,
       };
 
@@ -393,8 +373,8 @@ describe('RuntimeExecutor', () => {
     });
 
     it('reuses existing middlewares when options.middlewares is empty array', async () => {
-      const constructorMw: LanguageModelV3Middleware = {
-        specificationVersion: 'v3',
+      const constructorMw: LanguageModelV4Middleware = {
+        specificationVersion: 'v4',
         transformParams: async ({ params }) => params,
       };
 

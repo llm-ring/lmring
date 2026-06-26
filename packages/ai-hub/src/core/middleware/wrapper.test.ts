@@ -1,4 +1,4 @@
-import type { LanguageModelV3, LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4, LanguageModelV4Middleware } from '@ai-sdk/provider';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   composeMiddlewares,
@@ -18,15 +18,15 @@ vi.mock('ai', () => ({
 
 describe('wrapWithMiddlewares', () => {
   const mockModel = {
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     provider: 'test',
     modelId: 'test-model',
     doGenerate: vi.fn(),
     doStream: vi.fn(),
-  } as unknown as LanguageModelV3;
+  } as unknown as LanguageModelV4;
 
-  const mockMiddleware: LanguageModelV3Middleware = {
-    specificationVersion: 'v3',
+  const mockMiddleware: LanguageModelV4Middleware = {
+    specificationVersion: 'v4',
     transformParams: vi.fn(),
   };
 
@@ -47,8 +47,8 @@ describe('wrapWithMiddlewares', () => {
 
   it('wraps model with array of middlewares', async () => {
     const { wrapLanguageModel } = await import('ai');
-    const middleware1: LanguageModelV3Middleware = { specificationVersion: 'v3' };
-    const middleware2: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+    const middleware1: LanguageModelV4Middleware = { specificationVersion: 'v4' };
+    const middleware2: LanguageModelV4Middleware = { specificationVersion: 'v4' };
 
     wrapWithMiddlewares(mockModel, [middleware1, middleware2]);
 
@@ -59,12 +59,12 @@ describe('wrapWithMiddlewares', () => {
     const { wrapLanguageModel } = await import('ai');
     const calls: string[] = [];
 
-    const middleware1: LanguageModelV3Middleware = { specificationVersion: 'v3' };
-    const middleware2: LanguageModelV3Middleware = { specificationVersion: 'v3' };
+    const middleware1: LanguageModelV4Middleware = { specificationVersion: 'v4' };
+    const middleware2: LanguageModelV4Middleware = { specificationVersion: 'v4' };
 
     vi.mocked(wrapLanguageModel).mockImplementation(({ model, middleware }) => {
       calls.push(middleware === middleware1 ? 'first' : 'second');
-      return { ...model, middleware } as unknown as LanguageModelV3;
+      return { ...model, middleware } as unknown as LanguageModelV4;
     });
 
     wrapWithMiddlewares(mockModel, [middleware1, middleware2]);
@@ -82,7 +82,7 @@ describe('createLoggingMiddleware', () => {
   it('creates middleware with default options', () => {
     const middleware = createLoggingMiddleware();
 
-    expect(middleware.specificationVersion).toBe('v3');
+    expect(middleware.specificationVersion).toBe('v4');
     expect(middleware.transformParams).toBeDefined();
   });
 
@@ -93,7 +93,7 @@ describe('createLoggingMiddleware', () => {
     await middleware.transformParams?.({
       type: 'generate',
       params: { prompt: 'test' } as never,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(logger).toHaveBeenCalledWith('Model input:', { prompt: 'test' });
@@ -106,7 +106,7 @@ describe('createLoggingMiddleware', () => {
     await middleware.transformParams?.({
       type: 'generate',
       params: { prompt: 'test' } as never,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(logger).not.toHaveBeenCalled();
@@ -119,7 +119,7 @@ describe('createLoggingMiddleware', () => {
     await middleware.transformParams?.({
       type: 'generate',
       params: { prompt: 'test' } as never,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(consoleSpy).toHaveBeenCalledWith('Model input:', { prompt: 'test' });
@@ -133,7 +133,7 @@ describe('createLoggingMiddleware', () => {
     const result = await middleware.transformParams?.({
       type: 'generate',
       params,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(result).toEqual(params);
@@ -153,7 +153,7 @@ describe('createMetricsMiddleware', () => {
     const onMetrics = vi.fn();
     const middleware = createMetricsMiddleware(onMetrics);
 
-    expect(middleware.specificationVersion).toBe('v3');
+    expect(middleware.specificationVersion).toBe('v4');
     expect(middleware.wrapGenerate).toBeDefined();
   });
 
@@ -232,7 +232,7 @@ describe('createRetryMiddleware', () => {
   it('creates middleware with default options', () => {
     const middleware = createRetryMiddleware();
 
-    expect(middleware.specificationVersion).toBe('v3');
+    expect(middleware.specificationVersion).toBe('v4');
     expect(middleware.wrapGenerate).toBeDefined();
   });
 
@@ -325,7 +325,7 @@ describe('composeMiddlewares', () => {
   it('creates middleware with transformParams', () => {
     const middleware = composeMiddlewares();
 
-    expect(middleware.specificationVersion).toBe('v3');
+    expect(middleware.specificationVersion).toBe('v4');
     expect(middleware.transformParams).toBeDefined();
     expect(middleware.wrapGenerate).toBeDefined();
     expect(middleware.wrapStream).toBeDefined();
@@ -334,16 +334,16 @@ describe('composeMiddlewares', () => {
   it('chains transformParams in order', async () => {
     const order: string[] = [];
 
-    const middleware1: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware1: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       transformParams: async ({ params }) => {
         order.push('first');
         return { ...params, first: true };
       },
     };
 
-    const middleware2: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware2: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       transformParams: async ({ params }) => {
         order.push('second');
         return { ...params, second: true };
@@ -355,7 +355,7 @@ describe('composeMiddlewares', () => {
     const result = await composed.transformParams?.({
       type: 'generate',
       params: { original: true } as never,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(order).toEqual(['first', 'second']);
@@ -363,12 +363,12 @@ describe('composeMiddlewares', () => {
   });
 
   it('skips middlewares without transformParams', async () => {
-    const middleware1: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware1: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
     };
 
-    const middleware2: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware2: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       transformParams: async ({ params }) => ({ ...params, modified: true }),
     };
 
@@ -377,7 +377,7 @@ describe('composeMiddlewares', () => {
     const result = await composed.transformParams?.({
       type: 'generate',
       params: { original: true } as never,
-      model: {} as LanguageModelV3,
+      model: {} as LanguageModelV4,
     });
 
     expect(result).toEqual({ original: true, modified: true });
@@ -386,8 +386,8 @@ describe('composeMiddlewares', () => {
   it('chains wrapGenerate in order (first outer, last inner)', async () => {
     const order: string[] = [];
 
-    const middleware1: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware1: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       wrapGenerate: async ({ doGenerate }) => {
         order.push('first-before');
         const result = await doGenerate();
@@ -396,8 +396,8 @@ describe('composeMiddlewares', () => {
       },
     };
 
-    const middleware2: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware2: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       wrapGenerate: async ({ doGenerate }) => {
         order.push('second-before');
         const result = await doGenerate();
@@ -427,8 +427,8 @@ describe('composeMiddlewares', () => {
   it('chains wrapStream in order', async () => {
     const order: string[] = [];
 
-    const middleware1: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware1: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       wrapStream: async ({ doStream }) => {
         order.push('first-before');
         const result = await doStream();
@@ -437,8 +437,8 @@ describe('composeMiddlewares', () => {
       },
     };
 
-    const middleware2: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware2: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       wrapStream: async ({ doStream }) => {
         order.push('second-before');
         const result = await doStream();
@@ -466,12 +466,12 @@ describe('composeMiddlewares', () => {
   });
 
   it('skips middlewares without wrapGenerate', async () => {
-    const middleware1: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware1: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
     };
 
-    const middleware2: LanguageModelV3Middleware = {
-      specificationVersion: 'v3',
+    const middleware2: LanguageModelV4Middleware = {
+      specificationVersion: 'v4',
       wrapGenerate: async ({ doGenerate }) => {
         const result = await doGenerate();
         return { ...result, modified: true };
