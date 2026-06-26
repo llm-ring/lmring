@@ -1,4 +1,4 @@
-import type { LanguageModelV3Middleware } from '@ai-sdk/provider';
+import type { LanguageModelV4Middleware } from '@ai-sdk/provider';
 
 export interface PluginContext {
   providerId: string;
@@ -41,7 +41,7 @@ export abstract class AiPlugin {
     return chunk;
   }
 
-  toMiddleware(): LanguageModelV3Middleware | null {
+  toMiddleware(): LanguageModelV4Middleware | null {
     return null;
   }
 }

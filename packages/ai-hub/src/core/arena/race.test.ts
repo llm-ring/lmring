@@ -46,7 +46,7 @@ const createMockGenerateResult = (text: string, delay = 0) => {
 const createMockProvider = (providerId: string) => ({
   providerId,
   languageModel: vi.fn().mockReturnValue({
-    specificationVersion: 'v3',
+    specificationVersion: 'v4',
     provider: providerId,
     modelId: 'test-model',
     supportedUrls: {},

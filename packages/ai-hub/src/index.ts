@@ -1,8 +1,8 @@
 // Core exports
 
 export type {
-  LanguageModelV2,
-  LanguageModelV2Middleware,
+  LanguageModelV4,
+  LanguageModelV4Middleware,
 } from '@ai-sdk/provider';
 export { APICallError } from '@ai-sdk/provider';
 // Re-export commonly used AI SDK types for convenience

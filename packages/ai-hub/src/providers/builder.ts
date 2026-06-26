@@ -6,10 +6,10 @@ import { createMistral } from '@ai-sdk/mistral';
 import { createOpenAI } from '@ai-sdk/openai';
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { createXai } from '@ai-sdk/xai';
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 
 import type { ProviderInstance, ProviderOptions } from '../types/provider';
 import { ConfigurationError, ProviderError } from '../utils/errors';
+import { createOpenRouter } from './openrouter-compat';
 import { registry } from './registry';
 
 export class ConfigurableBuilder {
