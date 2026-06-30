@@ -42,7 +42,7 @@
     "@vercel/sandbox": "^2.2.1",
     "ahooks": "^3.9.7",
     "fflate": "^0.8.3",
-    "framer-motion": "^12.42.0",
+    "framer-motion": "^12.42.2",
     "lucide-react": "^1.22.0",
     "nanoid": "^5.1.16",
     "next": "16.2.9",
