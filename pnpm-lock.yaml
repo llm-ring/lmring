@@ -123,8 +123,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(plyr@3.8.4)(react@19.2.7)
       posthog-js:
-        specifier: ^1.396.2
-        version: 1.396.2
+        specifier: ^1.396.3
+        version: 1.396.3
       react:
         specifier: 19.2.7
         version: 19.2.7
@@ -3017,8 +3017,8 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@posthog/core@1.38.1':
-    resolution: {integrity: sha512-tsJTugsKzx47eRMjNfG272/GFf0FF0LeI+gyJ/anibpbYAzdNuX5kr6enpmJrhdgLESqzJGH8QF0+I9075Xr1Q==}
+  '@posthog/core@1.39.2':
+    resolution: {integrity: sha512-G/TL5Xykl+9xCDtBwHHPRSToS/43UjzyxKOfhlTwu/hJHt3v39Q2OFu8hdum71Iu7+tuxxISGVcFMlIST7ksjA==}
 
   '@posthog/types@1.392.0':
     resolution: {integrity: sha512-nctNujXL3FC1v99FktaTMSugSD9ZOZekEpahUSafkU2TSvW+XGKNkQZbokuJtiWvPBK208dwMJva8UfBkChqpw==}
@@ -6507,9 +6507,6 @@ packages:
   dompurify@3.4.11:
     resolution: {integrity: sha512-zhlUV12GsaRzMsf9q5M254YhA4+VuF0fG+QFqu6aYpoGlKtz+w8//jBcGVYBgQkR5GHjUomejY84AV+/uPbWdw==}
 
-  dompurify@3.4.8:
-    resolution: {integrity: sha512-yb1cEmaOum7wFvOCSQxyfgVlv5D47Rc30iZWoMpbDIWTnJ6grDDQyu2KFJzB2k7u0pMuJcQ1zphH//fFnw2tjQ==}
-
   dot-prop@10.1.0:
     resolution: {integrity: sha512-MVUtAugQMOff5RnBy2d9N31iG0lNwg1qAoAOn7pOK5wf94WIaE3My2p3uwTQuvS2AcqchkcR3bHByjaM0mmi7Q==}
     engines: {node: '>=20'}
@@ -7149,6 +7146,7 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-repo-info@2.1.1:
@@ -8734,8 +8732,8 @@ packages:
     resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
     engines: {node: '>=12'}
 
-  posthog-js@1.396.2:
-    resolution: {integrity: sha512-WFdS0JL+r/M7A9XQwIGbw1Xn6W7/V5TEmv1wgrq7GFcPxZ0I3TktNGtGQNmzARbI8nKedAHFkY9UPDDg+NTSQg==}
+  posthog-js@1.396.3:
+    resolution: {integrity: sha512-CL4mH3F2azsONko/zC2931RLdt6RxTsEr7x7Lyk0SDmj5hZuvBCTbg9MKViXwSRhBr3/SaGcaHS1n95WxTrsCw==}
 
   powershell-utils@0.1.0:
     resolution: {integrity: sha512-dM0jVuXJPsDN6DvRpea484tCUaMiXWjuCn++HGTqUWzGDjv5tZkEZldAJ/UMlqRYGFrD/etByo4/xOuC/snX2A==}
@@ -12939,7 +12937,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@posthog/core@1.38.1':
+  '@posthog/core@1.39.2':
     dependencies:
       '@posthog/types': 1.392.0
 
@@ -16647,10 +16645,6 @@ snapshots:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
-  dompurify@3.4.8:
-    optionalDependencies:
-      '@types/trusted-types': 2.0.7
-
   dot-prop@10.1.0:
     dependencies:
       type-fest: 5.7.0
@@ -18424,7 +18418,7 @@ snapshots:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.14
       dayjs: 1.11.21
-      dompurify: 3.4.8
+      dompurify: 3.4.11
       katex: 0.16.47
       khroma: 2.1.0
       lodash-es: 4.18.1
@@ -19278,9 +19272,9 @@ snapshots:
 
   postgres@3.4.9: {}
 
-  posthog-js@1.396.2:
+  posthog-js@1.396.3:
     dependencies:
-      '@posthog/core': 1.38.1
+      '@posthog/core': 1.39.2
       '@posthog/types': 1.392.0
       core-js: 3.49.0
       dompurify: 3.4.11
