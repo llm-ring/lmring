@@ -31,7 +31,7 @@
     "@lmring/ui": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@lobehub/fluent-emoji": "^4.1.0",
-    "@lobehub/icons": "^5.10.0",
+    "@lobehub/icons": "^5.10.1",
     "@lobehub/ui": "^5.18.0",
     "@logtape/logtape": "^2.2.2",
     "@sentry/nextjs": "^10.62.0",
