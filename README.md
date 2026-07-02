@@ -127,7 +127,7 @@ Deploy to your preferred platform. Configure environment variables as shown abov
 
 | Layer | Technology |
 |-------|------------|
-| Framework | Next.js 16, React 19, TypeScript |
+| Framework | Next.js 16, React 19, TypeScript 6 |
 | Styling | Tailwind CSS 4, shadcn/ui |
 | State | Zustand |
 | Database | PostgreSQL, DrizzleORM |

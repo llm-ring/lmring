@@ -33,7 +33,7 @@ Built with modern technologies:
   - `database/` - DrizzleORM schemas
   - `env/` - Environment variable management
   - `i18n/` - Internationalization
-  - `model-depot/` - AI model definitions (60+ providers)
+  - `model-depot/` - AI model definitions (50+ providers)
   - `storage/` - File storage (S3, Supabase)
   - `theme/` - Theme engine, tokens, presets, CSS variable generation
   - `ui/` - UI components
@@ -119,7 +119,7 @@ Built with modern technologies:
 
 - **Node.js**: v24.11.1+
 - **Package Manager**: pnpm 10.28.2
-- **Deployment Modes**: SaaS (OAuth) or self-hosted (email/password)
+- **Auth**: OAuth (GitHub, Google, Linux.do) and Email OTP (Resend); all providers are optional and configured via environment variables
 
 ## Resources
 
