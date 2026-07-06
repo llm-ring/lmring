@@ -45,10 +45,10 @@
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "fast-check": "^4.8.0",
     "tsdown": "0.22.3",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   }
 }
