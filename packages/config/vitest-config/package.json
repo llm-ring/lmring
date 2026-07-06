@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.3",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "happy-dom": "20.10.6",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   }
 }
