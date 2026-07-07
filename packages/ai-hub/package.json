@@ -27,11 +27,11 @@
     "@ai-sdk/openai": "^4.0.8",
     "@ai-sdk/openai-compatible": "^3.0.5",
     "@ai-sdk/provider": "^4.0.2",
-    "@ai-sdk/xai": "^4.0.6",
+    "@ai-sdk/xai": "^4.0.7",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
-    "@openrouter/ai-sdk-provider": "^2.10.0",
-    "ai": "^7.0.15",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.16",
     "zod": "^4.4.3"
   },
   "devDependencies": {

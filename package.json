@@ -35,9 +35,9 @@
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
     "husky": "^9.1.7",
-    "knip": "^6.24.0",
+    "knip": "^6.25.0",
     "lint-staged": "^17.0.8",
-    "turbo": "^2.10.3"
+    "turbo": "^2.10.4"
   },
   "packageManager": "pnpm@10.28.2"
 }
