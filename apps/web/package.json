@@ -33,7 +33,7 @@
     "@lobehub/fluent-emoji": "^4.1.0",
     "@lobehub/icons": "^5.10.1",
     "@lobehub/ui": "^5.19.0",
-    "@logtape/logtape": "^2.2.3",
+    "@logtape/logtape": "^2.2.4",
     "@sentry/nextjs": "^10.63.0",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.0",
