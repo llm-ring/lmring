@@ -8,15 +8,38 @@ import {
   type ReactElement,
   type ReactNode,
   useContext,
+  useState,
 } from 'react';
 
 // Utility function
 export const cn = (...classes: Array<string | false | null | undefined>) =>
   classes.filter(Boolean).join(' ');
 
-// Hook mocks
-export const useControllableState = <T,>({ defaultValue }: { defaultValue?: T }) => {
-  const [value, setValue] = [defaultValue, () => {}] as const;
+// Hook mocks — mirrors @lmring/ui controllable state for unit tests
+export const useControllableState = <T,>({
+  prop,
+  defaultProp,
+  defaultValue,
+  onChange,
+}: {
+  prop?: T;
+  defaultProp?: T;
+  defaultValue?: T;
+  onChange?: (value: T) => void;
+}) => {
+  const [uncontrolled, setUncontrolled] = useState<T | undefined>(defaultProp ?? defaultValue);
+  const isControlled = prop !== undefined;
+  const value = isControlled ? prop : uncontrolled;
+
+  const setValue = (next: T | ((prev: T | undefined) => T)) => {
+    const resolved =
+      typeof next === 'function' ? (next as (prev: T | undefined) => T)(value) : next;
+    if (!isControlled) {
+      setUncontrolled(resolved);
+    }
+    onChange?.(resolved);
+  };
+
   return [value, setValue] as const;
 };
 
@@ -374,17 +397,79 @@ CommandItem.displayName = 'CommandItem';
 export const CommandShortcut = createWrapper('command-shortcut', 'span');
 export const CommandSeparator = createWrapper('command-separator', 'hr');
 
-// Collapsible components
-export const Collapsible = FragmentWrapper;
+// Collapsible components — lightweight open/close wiring for unit tests
+const CollapsibleCtx = createContext<{
+  open: boolean;
+  onOpenChange?: (open: boolean) => void;
+}>({ open: false });
+
+export const Collapsible = ({
+  open,
+  defaultOpen,
+  onOpenChange,
+  children,
+  ...props
+}: {
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: ReactNode;
+  className?: string;
+}) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(Boolean(defaultOpen));
+  const isControlled = open !== undefined;
+  const resolvedOpen = isControlled ? Boolean(open) : uncontrolledOpen;
+
+  const handleOpenChange = (next: boolean) => {
+    if (!isControlled) {
+      setUncontrolledOpen(next);
+    }
+    onOpenChange?.(next);
+  };
+
+  return (
+    <CollapsibleCtx.Provider value={{ open: resolvedOpen, onOpenChange: handleOpenChange }}>
+      <div data-testid="collapsible" data-state={resolvedOpen ? 'open' : 'closed'} {...props}>
+        {children}
+      </div>
+    </CollapsibleCtx.Provider>
+  );
+};
+
 export const CollapsibleTrigger = forwardRef<HTMLButtonElement, ComponentProps<'button'>>(
-  ({ children, ...props }, ref) => (
-    <button ref={ref} type="button" {...props}>
-      {children}
-    </button>
-  ),
+  ({ children, onClick, ...props }, ref) => {
+    const { open, onOpenChange } = useContext(CollapsibleCtx);
+    return (
+      <button
+        ref={ref}
+        type="button"
+        {...props}
+        onClick={(event) => {
+          onOpenChange?.(!open);
+          onClick?.(event);
+        }}
+      >
+        {children}
+      </button>
+    );
+  },
 );
 CollapsibleTrigger.displayName = 'CollapsibleTrigger';
-export const CollapsibleContent = createWrapper('collapsible-content');
+export const CollapsibleContent = ({
+  children,
+  ...props
+}: {
+  children?: ReactNode;
+  className?: string;
+}) => {
+  const { open } = useContext(CollapsibleCtx);
+  if (!open) return null;
+  return (
+    <div data-testid="collapsible-content" {...props}>
+      {children}
+    </div>
+  );
+};
 
 // ScrollArea components
 export const ScrollArea = createWrapper('scroll-area');

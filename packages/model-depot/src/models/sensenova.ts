@@ -1,6 +1,16 @@
-import type { ChatModelCard } from '../types';
+import type { ChatModelCard, ImageModelCard } from '../types';
 
 const sensenovaModels: ChatModelCard[] = [
+  {
+    id: 'deepseek-v4-flash',
+    displayName: 'DeepSeek V4 Flash',
+    description: '商汤平台上的 DeepSeek V4 高性能对话模型，支持推理与非推理模式。',
+    type: 'chat',
+    contextWindowTokens: 262_144,
+    maxOutput: 65_536,
+    abilities: { functionCall: true, reasoning: true },
+    pricing: { currency: 'CNY', input: 0, output: 0 },
+  },
   {
     id: 'sensenova-6.7-flash-lite',
     displayName: 'SenseNova 6.7 Flash Lite',
@@ -252,4 +262,15 @@ const sensenovaModels: ChatModelCard[] = [
   },
 ];
 
-export default sensenovaModels;
+const sensenovaImageModels: ImageModelCard[] = [
+  {
+    id: 'sensenova-u1-fast',
+    displayName: 'SenseNova U1 Fast',
+    description: 'SenseNova U1 的加速版本，针对信息图生成进行优化。',
+    type: 'image',
+    enabled: true,
+    releasedAt: '2026-05-08',
+  },
+];
+
+export default { chat: sensenovaModels, image: sensenovaImageModels };

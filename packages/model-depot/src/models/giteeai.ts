@@ -2,6 +2,13 @@ import type { ChatModelCard, ImageModelCard } from '../types';
 
 const giteeaiChatModels: ChatModelCard[] = [
   {
+    id: 'code-raccoon-v1',
+    displayName: 'Code Raccoon V1',
+    description: '代码小浣熊软件研发助手，支持需求分析、架构设计、编码与测试。',
+    type: 'chat',
+    enabled: true,
+  },
+  {
     id: 'Qwen2.5-72B-Instruct',
     displayName: 'Qwen2.5 72B Instruct',
     description:

@@ -2,6 +2,17 @@ import type { ChatModelCard, ImageModelCard, VideoModelCard } from '../types';
 
 const wenxinChatModels: ChatModelCard[] = [
   {
+    id: 'ernie-4.5-turbo-20260402',
+    displayName: 'ERNIE 4.5 Turbo 20260402',
+    description: '文心高性能通用模型，支持搜索增强与工具调用。',
+    type: 'chat',
+    contextWindowTokens: 131_072,
+    maxOutput: 12_288,
+    enabled: true,
+    abilities: { functionCall: true, search: true },
+    pricing: { currency: 'CNY', input: 0.8, output: 3.2, cachedInput: 0.2 },
+  },
+  {
     id: 'ernie-5.1',
     displayName: 'ERNIE 5.1',
     description:

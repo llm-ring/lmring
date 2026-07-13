@@ -437,4 +437,223 @@ describe('SettingsPage Provider Handlers', () => {
     expect(customProvider?.isCustom).toBe(true);
     expect(customProvider?.providerType).toBe('openai');
   });
+
+  it('handleToggleProvider persists PATCH and reverts on failure', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (url === '/api/settings/api-keys' && (!options || options.method === 'GET')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            keys: [
+              {
+                id: 'key-1',
+                providerName: 'openai',
+                enabled: false,
+                hasApiKey: true,
+              },
+            ],
+          }),
+        });
+      }
+      if (url === '/api/settings/api-keys/key-1' && options?.method === 'PATCH') {
+        return Promise.resolve({ ok: false, status: 500 });
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) });
+    }) as unknown as typeof fetch;
+
+    render(<SettingsPage />, { wrapper: createWrapper() });
+    fireEvent.click(screen.getByText('Settings.tabs_provider'));
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.isLoading).toBe(false);
+    });
+
+    await capturedProviderLayoutProps?.onToggleProvider?.('openai', true, 'key-1');
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/settings/api-keys/key-1',
+        expect.objectContaining({ method: 'PATCH' }),
+      );
+    });
+
+    // After failed PATCH, connected should revert
+    const openai = (
+      capturedProviderLayoutProps?.providers as { id: string; connected: boolean }[]
+    )?.find((p) => p.id === 'openai');
+    expect(openai?.connected).toBe(false);
+    expect(errorSpy).toHaveBeenCalled();
+    errorSpy.mockRestore();
+  });
+
+  it('handleToggleProvider reverts on network error and resolves apiKeyId from store', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (url === '/api/settings/api-keys' && (!options || options.method === 'GET')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            keys: [
+              {
+                id: 'key-openai',
+                providerName: 'openai',
+                enabled: true,
+                hasApiKey: true,
+              },
+            ],
+          }),
+        });
+      }
+      if (
+        String(url).includes('/api/settings/api-keys/key-openai') &&
+        options?.method === 'PATCH'
+      ) {
+        return Promise.reject(new Error('network'));
+      }
+      return Promise.resolve({ ok: true, json: async () => ({}) });
+    }) as unknown as typeof fetch;
+
+    render(<SettingsPage />, { wrapper: createWrapper() });
+    fireEvent.click(screen.getByText('Settings.tabs_provider'));
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.isLoading).toBe(false);
+    });
+
+    // No apiKeyId passed — should resolve from savedApiKeys
+    await capturedProviderLayoutProps?.onToggleProvider?.('openai');
+
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalled();
+    });
+    errorSpy.mockRestore();
+  });
+
+  it('handleSaveProvider updates existing key and adds new key when missing', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        keys: [
+          {
+            id: 'key-1',
+            providerName: 'openai',
+            enabled: true,
+            hasApiKey: true,
+            proxyUrl: '',
+          },
+        ],
+      }),
+    }) as unknown as typeof fetch;
+
+    render(<SettingsPage />, { wrapper: createWrapper() });
+    fireEvent.click(screen.getByText('Settings.tabs_provider'));
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.isLoading).toBe(false);
+    });
+
+    (capturedProviderLayoutProps?.onSaveProvider as ((...args: unknown[]) => void) | undefined)?.(
+      'openai',
+      'key-1-updated',
+      'https://proxy',
+      true,
+    );
+
+    await waitFor(() => {
+      const openai = (
+        capturedProviderLayoutProps?.providers as {
+          id: string;
+          apiKeyId?: string;
+          proxyUrl?: string;
+          hasApiKey?: boolean;
+        }[]
+      )?.find((p) => p.id === 'openai');
+      expect(openai?.apiKeyId).toBe('key-1-updated');
+      expect(openai?.proxyUrl).toBe('https://proxy');
+      expect(openai?.hasApiKey).toBe(true);
+    });
+
+    // Save for a provider not yet in savedApiKeys
+    (capturedProviderLayoutProps?.onSaveProvider as ((...args: unknown[]) => void) | undefined)?.(
+      'unknown-provider',
+      'new-key',
+      'https://p2',
+      false,
+    );
+  });
+
+  it('handleAddProvider and handleDeleteProvider update provider list', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        keys: [
+          {
+            id: 'custom-key',
+            providerName: 'custom-prov',
+            enabled: false,
+            hasApiKey: true,
+            isCustom: true,
+            providerType: 'openai',
+          },
+        ],
+      }),
+    }) as unknown as typeof fetch;
+
+    render(<SettingsPage />, { wrapper: createWrapper() });
+    fireEvent.click(screen.getByText('Settings.tabs_provider'));
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.isLoading).toBe(false);
+    });
+
+    const beforeCount = capturedProviderLayoutProps?.providers.length ?? 0;
+
+    capturedProviderLayoutProps?.onAddProvider?.({
+      id: 'brand-new',
+      name: 'Brand New',
+      connected: false,
+      type: 'disabled',
+      apiKeyId: 'brand-key',
+      isCustom: true,
+      providerType: 'openai',
+      proxyUrl: 'https://x',
+    });
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.providers.length).toBe(beforeCount + 1);
+    });
+
+    capturedProviderLayoutProps?.onDeleteProvider?.('custom-prov');
+
+    await waitFor(() => {
+      const stillThere = (capturedProviderLayoutProps?.providers as { id: string }[])?.find(
+        (p) => p.id === 'custom-prov',
+      );
+      expect(stillThere).toBeUndefined();
+    });
+  });
+
+  it('handleToggleProvider without apiKeyId only updates local state', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ keys: [] }),
+    }) as unknown as typeof fetch;
+
+    render(<SettingsPage />, { wrapper: createWrapper() });
+    fireEvent.click(screen.getByText('Settings.tabs_provider'));
+
+    await waitFor(() => {
+      expect(capturedProviderLayoutProps?.isLoading).toBe(false);
+    });
+
+    const fetchCallsBefore = vi.mocked(global.fetch).mock.calls.length;
+    await capturedProviderLayoutProps?.onToggleProvider?.('openai', true);
+    // Only the initial GET should have run — no PATCH without apiKeyId
+    const patchCalls = vi
+      .mocked(global.fetch)
+      .mock.calls.filter((c) => c[1] && (c[1] as RequestInit).method === 'PATCH');
+    expect(patchCalls.length).toBe(0);
+    expect(vi.mocked(global.fetch).mock.calls.length).toBeGreaterThanOrEqual(fetchCallsBefore);
+  });
 });

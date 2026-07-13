@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mocks = vi.hoisted(() => ({
   mockCreateClient: vi.fn(),
@@ -273,6 +273,10 @@ describe('createSupabaseStorage', () => {
     vi.unstubAllEnvs();
   });
 
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   it('creates SupabaseStorage with env config', () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://project.supabase.co');
     vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'service-key');
@@ -297,6 +301,7 @@ describe('createSupabaseStorage', () => {
   });
 
   it('throws error when URL missing', () => {
+    vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', '');
     vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'key');
 
     expect(() => createSupabaseStorage()).toThrow(
@@ -305,6 +310,7 @@ describe('createSupabaseStorage', () => {
   });
 
   it('throws error when service role key missing', () => {
+    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', '');
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://project.supabase.co');
 
     expect(() => createSupabaseStorage()).toThrow(

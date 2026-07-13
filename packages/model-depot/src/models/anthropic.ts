@@ -2,6 +2,25 @@ import type { ChatModelCard } from '../types';
 
 const anthropicModels: ChatModelCard[] = [
   {
+    id: 'claude-sonnet-5',
+    displayName: 'Claude Sonnet 5',
+    description:
+      "Claude Sonnet 5 is Anthropic's most agentic Sonnet model for sustained coding, tool use, and long-context workflows.",
+    type: 'chat',
+    contextWindowTokens: 1_000_000,
+    maxOutput: 128_000,
+    enabled: true,
+    abilities: {
+      functionCall: true,
+      reasoning: true,
+      search: true,
+      structuredOutput: true,
+      vision: true,
+    },
+    pricing: { input: 2, output: 10, cachedInput: 0.2 },
+    releasedAt: '2026-06-30',
+  },
+  {
     id: 'claude-fable-5',
     displayName: 'Claude Fable 5',
     description:

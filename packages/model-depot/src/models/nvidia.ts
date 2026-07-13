@@ -2,6 +2,15 @@ import type { ChatModelCard } from '../types';
 
 const nvidiaModels: ChatModelCard[] = [
   {
+    id: 'minimaxai/minimax-m2.7',
+    displayName: 'MiniMax-M2.7',
+    description: 'MiniMax M2.7 面向编码与智能体工作流。',
+    type: 'chat',
+    contextWindowTokens: 204_800,
+    maxOutput: 131_072,
+    abilities: { functionCall: true, reasoning: true },
+  },
+  {
     id: 'minimaxai/minimax-m2',
     displayName: 'MiniMax-M2',
     description: 'MiniMax紧凑MoE模型，编码和智能体任务表现优异。',

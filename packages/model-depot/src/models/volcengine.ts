@@ -2,6 +2,41 @@ import type { ChatModelCard, ImageModelCard, VideoModelCard } from '../types';
 
 const volcengineChatModels: ChatModelCard[] = [
   {
+    id: 'doubao-seed-evolving',
+    displayName: 'Doubao Seed Evolving',
+    description: '豆包自进化模型，每周持续更新以保持模型能力领先。',
+    type: 'chat',
+    contextWindowTokens: 256_000,
+    maxOutput: 128_000,
+    abilities: { functionCall: true, reasoning: true, search: true, video: true, vision: true },
+    pricing: { currency: 'CNY', input: 6, output: 30, cachedInput: 1.2 },
+    releasedAt: '2026-06-23',
+  },
+  {
+    id: 'doubao-seed-2.1-pro',
+    displayName: 'Doubao Seed 2.1 Pro',
+    description: '豆包新一代旗舰智能体通用模型，面向编码、任务规划与长链路执行。',
+    type: 'chat',
+    contextWindowTokens: 256_000,
+    maxOutput: 128_000,
+    enabled: true,
+    abilities: { functionCall: true, reasoning: true, search: true, video: true, vision: true },
+    pricing: { currency: 'CNY', input: 6, output: 30, cachedInput: 1.2 },
+    releasedAt: '2026-06-23',
+  },
+  {
+    id: 'doubao-seed-2.1-turbo',
+    displayName: 'Doubao Seed 2.1 Turbo',
+    description: '豆包高效智能体模型，面向高并发生产场景。',
+    type: 'chat',
+    contextWindowTokens: 256_000,
+    maxOutput: 128_000,
+    enabled: true,
+    abilities: { functionCall: true, reasoning: true, search: true, video: true, vision: true },
+    pricing: { currency: 'CNY', input: 3, output: 15, cachedInput: 0.6 },
+    releasedAt: '2026-06-23',
+  },
+  {
     id: 'deepseek-v4-pro',
     displayName: 'DeepSeek V4 Pro',
     description:

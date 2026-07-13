@@ -2,6 +2,24 @@ import type { ChatModelCard, ImageModelCard, VideoModelCard } from '../types';
 
 const xaiChatModels: ChatModelCard[] = [
   {
+    id: 'grok-4.5',
+    displayName: 'Grok 4.5',
+    description:
+      "SpaceXAI's flagship model for agentic tasks and knowledge work, with strong coding performance.",
+    type: 'chat',
+    contextWindowTokens: 500_000,
+    enabled: true,
+    abilities: {
+      functionCall: true,
+      reasoning: true,
+      search: true,
+      structuredOutput: true,
+      vision: true,
+    },
+    pricing: { input: 2, output: 6, cachedInput: 0.5 },
+    releasedAt: '2026-07-08',
+  },
+  {
     id: 'grok-4.3',
     displayName: 'Grok 4.3',
     description:
