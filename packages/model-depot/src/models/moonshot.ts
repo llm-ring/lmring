@@ -2,6 +2,42 @@ import type { ChatModelCard } from '../types';
 
 const moonshotModels: ChatModelCard[] = [
   {
+    id: 'kimi-k2.7-code',
+    displayName: 'Kimi K2.7 Code',
+    description:
+      "Kimi K2.7 Code is Kimi's most capable coding model, optimized for long-context software engineering tasks.",
+    type: 'chat',
+    contextWindowTokens: 262_144,
+    maxOutput: 32_768,
+    enabled: true,
+    abilities: {
+      functionCall: true,
+      reasoning: true,
+      structuredOutput: true,
+      video: true,
+      vision: true,
+    },
+    pricing: { currency: 'CNY', input: 6.5, output: 27, cachedInput: 1.3 },
+    releasedAt: '2026-06-12',
+  },
+  {
+    id: 'kimi-k2.7-code-highspeed',
+    displayName: 'Kimi K2.7 Code HighSpeed',
+    description: 'Kimi K2.7 Code 的高速版本，面向低延迟编程与智能体工作流。',
+    type: 'chat',
+    contextWindowTokens: 262_144,
+    maxOutput: 32_768,
+    abilities: {
+      functionCall: true,
+      reasoning: true,
+      structuredOutput: true,
+      video: true,
+      vision: true,
+    },
+    pricing: { currency: 'CNY', input: 13, output: 54, cachedInput: 2.6 },
+    releasedAt: '2026-06-15',
+  },
+  {
     id: 'kimi-k2-thinking',
     displayName: 'Kimi K2 Thinking',
     description: 'K2 长思考模型，支持 256k 上下文，支持多步工具调用与思考，擅长解决更复杂的问题。',

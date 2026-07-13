@@ -125,6 +125,28 @@ describe('getAllEnabledModels', () => {
   });
 });
 
+describe('upstream model catalog synchronization', () => {
+  it.each([
+    ['openai', 'gpt-5.6-sol'],
+    ['openai', 'gpt-5.6-terra'],
+    ['openai', 'gpt-5.6-luna'],
+    ['anthropic', 'claude-sonnet-5'],
+    ['xai', 'grok-4.5'],
+    ['google', 'gemini-3.1-flash-lite-image'],
+    ['moonshot', 'kimi-k2.7-code'],
+    ['volcengine', 'doubao-seed-2.1-pro'],
+  ])('includes %s model %s', (providerId, modelId) => {
+    const model = getModel(providerId, modelId);
+
+    expect(model).toMatchObject({
+      enabled: true,
+      id: modelId,
+      providerId,
+      source: 'builtin',
+    });
+  });
+});
+
 describe('getModelIdsForProvider', () => {
   it('returns array of model IDs', () => {
     const ids = getModelIdsForProvider('openai');

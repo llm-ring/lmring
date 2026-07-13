@@ -2,6 +2,37 @@ import type { ChatModelCard, ImageModelCard, VideoModelCard } from '../types';
 
 const googleChatModels: ChatModelCard[] = [
   {
+    id: 'gemini-3.1-flash-lite-image',
+    displayName: 'Nano Banana 2 Lite',
+    description:
+      "Google's fastest and most cost-efficient image generation model for high-volume generation and editing.",
+    type: 'chat',
+    contextWindowTokens: 69_632,
+    maxOutput: 4_096,
+    enabled: true,
+    abilities: { imageOutput: true, reasoning: true, vision: true },
+    pricing: { input: 0.25, output: 1.5 },
+    releasedAt: '2026-06-30',
+  },
+  {
+    id: 'gemma-4-26b-a4b-it',
+    displayName: 'Gemma 4 26B A4B IT',
+    type: 'chat',
+    contextWindowTokens: 294_912,
+    maxOutput: 32_768,
+    abilities: { functionCall: true, reasoning: true, search: true, vision: true },
+    pricing: { input: 0, output: 0, cachedInput: 0 },
+  },
+  {
+    id: 'gemma-4-31b-it',
+    displayName: 'Gemma 4 31B IT',
+    type: 'chat',
+    contextWindowTokens: 294_912,
+    maxOutput: 32_768,
+    abilities: { functionCall: true, reasoning: true, search: true, vision: true },
+    pricing: { input: 0, output: 0, cachedInput: 0 },
+  },
+  {
     id: 'gemini-3.5-flash',
     displayName: 'Gemini 3.5 Flash',
     description:
@@ -500,6 +531,16 @@ const googleChatModels: ChatModelCard[] = [
 ];
 
 const googleImageModels: ImageModelCard[] = [
+  {
+    id: 'gemini-3.1-flash-lite-image:image',
+    displayName: 'Nano Banana 2 Lite',
+    description:
+      "Google's fastest and most cost-efficient image generation model for high-volume generation and editing.",
+    type: 'image',
+    enabled: true,
+    pricing: { input: 0.25, output: 1.5 },
+    releasedAt: '2026-06-30',
+  },
   {
     id: 'imagen-4.0-generate-001',
     displayName: 'Imagen 4',

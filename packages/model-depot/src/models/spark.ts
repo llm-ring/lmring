@@ -2,6 +2,35 @@ import type { ChatModelCard } from '../types';
 
 const sparkModels: ChatModelCard[] = [
   {
+    id: 'spark-x2',
+    displayName: 'Spark X2',
+    description: '讯飞星火 X2 支持动态推理、函数调用与 128K 输出。',
+    type: 'chat',
+    contextWindowTokens: 131_072,
+    maxOutput: 131_072,
+    enabled: true,
+    abilities: { functionCall: true, reasoning: true, search: true },
+  },
+  {
+    id: 'spark-x2-flash',
+    displayName: 'Spark X2 Flash',
+    description: '讯飞星火 X2 Flash 使用 MoE 架构，面向智能体与编码场景。',
+    type: 'chat',
+    contextWindowTokens: 262_144,
+    maxOutput: 262_144,
+    enabled: true,
+    abilities: { functionCall: true, reasoning: true, search: true },
+  },
+  {
+    id: 'spark-x1.5',
+    displayName: 'Spark X1.5',
+    description: '讯飞星火 X1.5 支持动态思考模式、函数调用与 64K 输出。',
+    type: 'chat',
+    contextWindowTokens: 65_535,
+    maxOutput: 65_535,
+    abilities: { functionCall: true, reasoning: true, search: true },
+  },
+  {
     id: 'spark-x',
     displayName: 'Spark X1.5',
     description: '星火深度推理模型，支持动态思考模式，64K上下文。',

@@ -2,6 +2,17 @@ import type { ChatModelCard } from '../types';
 
 const cerebrasModels: ChatModelCard[] = [
   {
+    id: 'zai-glm-4.7',
+    displayName: 'GLM-4.7',
+    description: '智谱新一代旗舰模型，增强通用对话、推理与智能体能力。',
+    type: 'chat',
+    contextWindowTokens: 131_072,
+    maxOutput: 40_960,
+    abilities: { functionCall: true, reasoning: true },
+    pricing: { input: 2.25, output: 2.75 },
+    releasedAt: '2025-12-22',
+  },
+  {
     id: 'zai-glm-4.6',
     displayName: 'GLM-4.6',
     description: '编程推理任务表现优良，支持工具调用和agentic场景。',

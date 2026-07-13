@@ -2,6 +2,16 @@ import type { ChatModelCard, ImageModelCard } from '../types';
 
 const stepfunChatModels: ChatModelCard[] = [
   {
+    id: 'step-3.7-flash',
+    displayName: 'Step 3.7 Flash',
+    description: '阶跃星辰旗舰多模态推理模型，支持图像、视频、工具调用与三档推理强度。',
+    type: 'chat',
+    contextWindowTokens: 256_000,
+    enabled: true,
+    abilities: { functionCall: true, reasoning: true, search: true, video: true, vision: true },
+    pricing: { currency: 'CNY', input: 1.35, output: 8.1, cachedInput: 0.27 },
+  },
+  {
     id: 'step-3',
     displayName: 'Step 3',
     description:

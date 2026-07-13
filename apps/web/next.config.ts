@@ -45,6 +45,7 @@ const baseConfig: NextConfig = {
     },
   ],
   experimental: {
+    useTypeScriptCli: true,
     optimizePackageImports: [
       'lucide-react',
       '@lobehub/icons',
