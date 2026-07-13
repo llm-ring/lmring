@@ -159,4 +159,77 @@ describe('ModelCard', () => {
     fireEvent.click(screen.getByText('Clear Chat'));
     expect(onClear).toHaveBeenCalledTimes(1);
   });
+
+  it('toggles sync and opens model selector', () => {
+    const onSyncToggle = vi.fn();
+    render(
+      <ModelCard modelId="openai:gpt-4o" models={models} synced onSyncToggle={onSyncToggle} />,
+    );
+
+    fireEvent.click(screen.getByTestId('icon-ToggleRightIcon').closest('button')!);
+    expect(onSyncToggle).toHaveBeenCalledWith(false);
+
+    fireEvent.click(screen.getByTestId('model-selector-trigger'));
+    expect(screen.getByTestId('model-selector-overlay')).toBeInTheDocument();
+  });
+
+  it('moves model left/right and deletes from menu', () => {
+    const onMoveLeft = vi.fn();
+    const onMoveRight = vi.fn();
+    const onDelete = vi.fn();
+
+    render(
+      <ModelCard
+        modelId="openai:gpt-4o"
+        models={models}
+        canMoveLeft
+        canMoveRight
+        onMoveLeft={onMoveLeft}
+        onMoveRight={onMoveRight}
+        onDelete={onDelete}
+      />,
+    );
+
+    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    fireEvent.click(screen.getByText('Move Left'));
+    expect(onMoveLeft).toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    fireEvent.click(screen.getByText('Move Right'));
+    expect(onMoveRight).toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    fireEvent.click(screen.getByText('Delete Chat'));
+    expect(onDelete).toHaveBeenCalled();
+  });
+
+  it('renders chat list when messages exist and toggles unsynced icon', () => {
+    render(
+      <ModelCard
+        modelId="openai:gpt-4o"
+        models={models}
+        synced={false}
+        messages={[{ id: 'm1', role: 'user', content: 'hi', createdAt: new Date() } as never]}
+      />,
+    );
+    expect(screen.getByTestId('chat-list')).toBeInTheDocument();
+    expect(screen.getByTestId('icon-ToggleLeftIcon')).toBeInTheDocument();
+  });
+
+  it('updates remaining config sliders', () => {
+    const onConfigChange = vi.fn();
+    const { container } = render(
+      <ModelCard modelId="openai:gpt-4o" models={models} onConfigChange={onConfigChange} />,
+    );
+
+    const sliders = container.querySelectorAll('input[type="range"]');
+    // temperature, topP, frequency, presence after maxTokens
+    for (let i = 1; i < Math.min(sliders.length, 5); i++) {
+      const slider = sliders[i];
+      if (slider) {
+        fireEvent.change(slider, { target: { value: '0.5' } });
+      }
+    }
+    expect(onConfigChange).toHaveBeenCalled();
+  });
 });

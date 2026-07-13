@@ -315,6 +315,104 @@ describe('createWebDevStore', () => {
       store.getState().setPrompt('Build a todo app');
       expect(store.getState().prompt).toBe('Build a todo app');
     });
+
+    it('setSubmittedPrompt should update submittedPrompt', () => {
+      store.getState().setSubmittedPrompt('submitted');
+      expect(store.getState().submittedPrompt).toBe('submitted');
+    });
+  });
+
+  describe('conversation and snapshot helpers', () => {
+    it('setConversationId should update conversationId', () => {
+      store.getState().setConversationId('conv-1');
+      expect(store.getState().conversationId).toBe('conv-1');
+      store.getState().setConversationId(null);
+      expect(store.getState().conversationId).toBeNull();
+    });
+
+    it('setSnapshotId should update sandbox snapshotId or no-op', () => {
+      store.getState().setSnapshotId('missing', 'snap-1');
+      expect(store.getState().sandboxes.size).toBe(0);
+
+      store.getState().initSandbox('wf-1');
+      store.getState().setSnapshotId('wf-1', 'snap-1');
+      expect(store.getState().sandboxes.get('wf-1')?.snapshotId).toBe('snap-1');
+    });
+
+    it('no-ops file/terminal helpers for missing sandboxes', () => {
+      const before = store.getState().sandboxes;
+      store.getState().setSandboxFiles('missing', { a: '1' });
+      store.getState().appendSandboxFile('missing', 'a', '1');
+      store.getState().setActiveFile('missing', 'a');
+      store.getState().appendTerminalOutput('missing', 'line');
+      expect(store.getState().sandboxes).toBe(before);
+    });
+
+    it('setSandboxFiles uses null activeFile when files object is empty', () => {
+      store.getState().initSandbox('wf-1');
+      store.getState().setSandboxFiles('wf-1', {});
+      expect(store.getState().sandboxes.get('wf-1')?.activeFile).toBeNull();
+    });
+
+    it('updateSandboxStatus keeps prior error when status is error without message', () => {
+      store.getState().initSandbox('wf-1');
+      store.getState().updateSandboxStatus('wf-1', 'error', 'first');
+      store.getState().updateSandboxStatus('wf-1', 'error');
+      expect(store.getState().sandboxes.get('wf-1')?.error).toBe('first');
+    });
+
+    it('isAnyBuildingOrReady includes snapshotting and restoring', () => {
+      store.getState().initSandbox('wf-1');
+      store.getState().updateSandboxStatus('wf-1', 'snapshotting');
+      expect(store.getState().isAnyBuildingOrReady()).toBe(true);
+
+      store.getState().updateSandboxStatus('wf-1', 'restoring');
+      expect(store.getState().isAnyBuildingOrReady()).toBe(true);
+    });
+  });
+
+  describe('iteration management', () => {
+    it('addIteration and getActiveIteration work together', () => {
+      const iteration = {
+        id: 'it-1',
+        version: 1,
+        prompt: 'v1',
+        sandboxes: new Map(),
+        responseMap: new Map([['wf-1', 'hello']]),
+      };
+      store.getState().addIteration(iteration);
+      store.getState().setActiveIterationVersion(1);
+      expect(store.getState().iterations).toHaveLength(1);
+      expect(store.getState().getActiveIteration()).toEqual(iteration);
+      store.getState().setActiveIterationVersion(99);
+      expect(store.getState().getActiveIteration()).toBeUndefined();
+    });
+
+    it('snapshotCurrentIteration captures sandbox snapshots and response map', () => {
+      store.getState().initSandbox('wf-1');
+      store.getState().setSandboxReady('wf-1', 'sb-1', 'https://p', 'exp');
+      store.getState().setSandboxFiles('wf-1', { 'App.tsx': 'code' });
+      store.getState().setSnapshotId('wf-1', 'snap-x');
+
+      store
+        .getState()
+        .snapshotCurrentIteration('it-2', 2, 'iterate', new Map([['wf-1', 'response text']]));
+
+      const snap = store.getState().iterations[0];
+      expect(snap).toBeDefined();
+      if (!snap) throw new Error('expected snapshot');
+      expect(snap.id).toBe('it-2');
+      expect(snap.version).toBe(2);
+      expect(snap.prompt).toBe('iterate');
+      expect(snap.responseMap.get('wf-1')).toBe('response text');
+      expect(snap.sandboxes.get('wf-1')).toEqual({
+        files: { 'App.tsx': 'code' },
+        sandboxId: 'sb-1',
+        snapshotId: 'snap-x',
+        previewUrl: 'https://p',
+        expiresAt: 'exp',
+      });
+    });
   });
 
   describe('selector methods', () => {
@@ -455,5 +553,60 @@ describe('webdevSelectors', () => {
     expect(typeof actions.initSandbox).toBe('function');
     expect(typeof actions.destroySandbox).toBe('function');
     expect(typeof actions.checkConfig).toBe('function');
+    expect(typeof actions.setConversationId).toBe('function');
+    expect(typeof actions.setSubmittedPrompt).toBe('function');
+    expect(typeof actions.addIteration).toBe('function');
+    expect(typeof actions.snapshotCurrentIteration).toBe('function');
+  });
+
+  it('conversationId and iterations selectors expose state', () => {
+    store.getState().setConversationId('c1');
+    store.getState().addIteration({
+      id: 'i1',
+      version: 1,
+      prompt: 'p',
+      sandboxes: new Map(),
+      responseMap: new Map(),
+    });
+    expect(webdevSelectors.conversationId(store.getState())).toBe('c1');
+    expect(webdevSelectors.iterations(store.getState())).toHaveLength(1);
+    expect(webdevSelectors.activeIterationVersion(store.getState())).toBe(0);
+  });
+
+  it('isLatestIteration is true for version 0, empty iterations, or ahead of max', () => {
+    expect(webdevSelectors.isLatestIteration(store.getState())).toBe(true);
+
+    store.getState().addIteration({
+      id: 'i1',
+      version: 2,
+      prompt: 'p',
+      sandboxes: new Map(),
+      responseMap: new Map(),
+    });
+    store.getState().setActiveIterationVersion(1);
+    expect(webdevSelectors.isLatestIteration(store.getState())).toBe(false);
+
+    store.getState().setActiveIterationVersion(3);
+    expect(webdevSelectors.isLatestIteration(store.getState())).toBe(true);
+
+    store.getState().setActiveIterationVersion(0);
+    expect(webdevSelectors.isLatestIteration(store.getState())).toBe(true);
+  });
+
+  it('isAnyBuilding includes snapshotting and restoring', () => {
+    store.getState().initSandbox('wf-1');
+    store.getState().updateSandboxStatus('wf-1', 'snapshotting');
+    expect(webdevSelectors.isAnyBuilding(store.getState())).toBe(true);
+    store.getState().updateSandboxStatus('wf-1', 'restoring');
+    expect(webdevSelectors.isAnyBuilding(store.getState())).toBe(true);
+  });
+
+  it('webdevState includes submittedPrompt and iteration fields', () => {
+    store.getState().setSubmittedPrompt('done');
+    store.getState().setActiveIterationVersion(4);
+    const state = webdevSelectors.webdevState(store.getState());
+    expect(state.submittedPrompt).toBe('done');
+    expect(state.activeIterationVersion).toBe(4);
+    expect(state.iterations).toEqual([]);
   });
 });

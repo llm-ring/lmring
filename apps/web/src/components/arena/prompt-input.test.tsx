@@ -247,4 +247,146 @@ describe('PromptInput', () => {
       expect(onAddImages).not.toHaveBeenCalled();
     });
   });
+
+  it('marks upload errors and filters non-image files', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    uploadFileMock.mockRejectedValueOnce(new Error('upload boom'));
+
+    const onAddImages = vi.fn();
+    const onUpdateImage = vi.fn();
+    const image = new File(['img'], 'a.png', { type: 'image/png' });
+    const text = new File(['txt'], 'a.txt', { type: 'text/plain' });
+
+    render(
+      <PromptInput
+        value="hello"
+        onChange={vi.fn()}
+        onSubmit={vi.fn()}
+        uploadedImages={[]}
+        onAddImages={onAddImages}
+        onUpdateImage={onUpdateImage}
+        onRemoveImage={vi.fn().mockResolvedValue(undefined)}
+      >
+        <div data-testid="drop-target" />
+      </PromptInput>,
+    );
+
+    fireEvent.drop(screen.getByTestId('drop-target').parentElement as HTMLElement, {
+      dataTransfer: { files: [image, text], types: ['Files'] },
+    });
+
+    await waitFor(() => {
+      expect(onAddImages).toHaveBeenCalledTimes(1);
+    });
+    expect(onAddImages.mock.calls[0]?.[0]).toHaveLength(1);
+
+    await waitFor(() => {
+      expect(onUpdateImage).toHaveBeenCalledWith(
+        'uuid-1',
+        expect.objectContaining({
+          isUploading: false,
+          uploadError: 'upload boom',
+        }),
+      );
+    });
+    errorSpy.mockRestore();
+  });
+
+  it('handles drag enter/leave/over and mode callbacks when images change', async () => {
+    const onModeChange = vi.fn();
+    const onRemoveImage = vi.fn().mockResolvedValue(undefined);
+
+    const { rerender } = render(
+      <PromptInput
+        value="hello"
+        onChange={vi.fn()}
+        onSubmit={vi.fn()}
+        onModeChange={onModeChange}
+        uploadedImages={[]}
+        onAddImages={vi.fn()}
+        onUpdateImage={vi.fn()}
+        onRemoveImage={onRemoveImage}
+      >
+        <div data-testid="drop-target" />
+      </PromptInput>,
+    );
+
+    const root = screen.getByTestId('drop-target').parentElement as HTMLElement;
+    fireEvent.dragEnter(root, { dataTransfer: { types: ['Files'] } });
+    fireEvent.dragOver(root, { dataTransfer: { types: ['Files'] } });
+    fireEvent.dragLeave(root, {
+      dataTransfer: { types: ['Files'] },
+      relatedTarget: document.body,
+    });
+
+    const img = {
+      id: 'img-1',
+      file: new File(['x'], 'x.png', { type: 'image/png' }),
+      previewUrl: 'blob:x',
+      filename: 'x.png',
+      size: 1,
+    };
+
+    rerender(
+      <PromptInput
+        value="hello"
+        onChange={vi.fn()}
+        onSubmit={vi.fn()}
+        onModeChange={onModeChange}
+        uploadedImages={[img]}
+        onAddImages={vi.fn()}
+        onUpdateImage={vi.fn()}
+        onRemoveImage={onRemoveImage}
+      >
+        <div data-testid="drop-target" />
+      </PromptInput>,
+    );
+
+    await waitFor(() => {
+      expect(onModeChange).toHaveBeenCalledWith('upload');
+    });
+
+    // expose remove via consumer if available through context children would need export;
+    // cover empty drop path
+    fireEvent.drop(root, {
+      dataTransfer: { files: [], types: ['Files'] },
+    });
+  });
+
+  it('does not submit while loading or disabled', () => {
+    const onSubmit = vi.fn();
+    const { rerender } = render(
+      <PromptInput
+        value="hello"
+        onChange={vi.fn()}
+        onSubmit={onSubmit}
+        isLoading
+        uploadedImages={[]}
+        onAddImages={vi.fn()}
+        onUpdateImage={vi.fn()}
+        onRemoveImage={vi.fn().mockResolvedValue(undefined)}
+      >
+        <PromptInputTextarea aria-label="prompt" />
+      </PromptInput>,
+    );
+    fireEvent.keyDown(screen.getByLabelText('prompt'), { key: 'Enter' });
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    rerender(
+      <PromptInput
+        value="hello"
+        onChange={vi.fn()}
+        onSubmit={onSubmit}
+        disabled
+        uploadedImages={[]}
+        onAddImages={vi.fn()}
+        onUpdateImage={vi.fn()}
+        onRemoveImage={vi.fn().mockResolvedValue(undefined)}
+      >
+        <PromptInputTextarea aria-label="prompt" />
+      </PromptInput>,
+    );
+    fireEvent.keyDown(screen.getByLabelText('prompt'), { key: 'Enter' });
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
 });

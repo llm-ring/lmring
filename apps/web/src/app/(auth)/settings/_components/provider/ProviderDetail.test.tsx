@@ -83,7 +83,49 @@ vi.mock('./AddModelDialog', () => ({
 }));
 
 vi.mock('./EditModelDialog', () => ({
-  EditModelDialog: () => <div data-testid="edit-model-dialog">Edit Model</div>,
+  EditModelDialog: ({
+    open,
+    onSave,
+    onOpenChange,
+  }: {
+    open: boolean;
+    onSave: (data: {
+      displayName?: string;
+      abilities?: Record<string, boolean>;
+      supportsStreaming?: boolean;
+      priceCurrency?: string;
+      inputPrice?: number;
+      outputPrice?: number;
+    }) => Promise<void> | void;
+    onOpenChange: (open: boolean) => void;
+  }) =>
+    open ? (
+      <div data-testid="edit-model-dialog">
+        <button
+          type="button"
+          data-testid="save-model-edit"
+          onClick={() => {
+            void Promise.resolve(
+              onSave({
+                displayName: 'Updated Name',
+                abilities: { vision: true },
+                supportsStreaming: true,
+                priceCurrency: 'USD',
+                inputPrice: 1,
+                outputPrice: 2,
+              }),
+            ).catch(() => {
+              // handleSaveModelEdit rethrows after toast — swallow for tests
+            });
+          }}
+        >
+          Save Edit
+        </button>
+        <button type="button" data-testid="close-edit" onClick={() => onOpenChange(false)}>
+          Close
+        </button>
+      </div>
+    ) : null,
 }));
 
 describe('ProviderDetail', () => {
@@ -1116,5 +1158,303 @@ describe('ProviderDetail handler functions', () => {
     await waitFor(() => {
       expect(toast.success).toHaveBeenCalledWith('Provider Deleted', expect.any(Object));
     });
+  });
+
+  it('loads enabled models, custom models, and overrides on mount', async () => {
+    global.fetch = vi.fn().mockImplementation((url: string) => {
+      if (String(url).includes('/enabled-models')) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              models: [
+                { modelId: 'gpt-4', enabled: true },
+                { modelId: 'custom-from-db', enabled: true },
+              ],
+            }),
+        });
+      }
+      if (String(url).includes('/custom-models') && !String(url).includes('/custom-models/')) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              models: [{ modelId: 'custom-from-db', displayName: 'Custom DB Model' }],
+            }),
+        });
+      }
+      if (String(url).includes('/model-overrides')) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              overrides: [
+                {
+                  modelId: 'gpt-4',
+                  displayName: 'GPT-4 Override',
+                  abilities: { reasoning: true },
+                  inputPrice: 10,
+                  outputPrice: 20,
+                  priceCurrency: 'USD',
+                },
+              ],
+            }),
+        });
+      }
+      return Promise.resolve({ ok: true, json: () => Promise.resolve({}) });
+    });
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={{ ...defaultProvider, apiKeyId: 'key-1', hasApiKey: true, connected: true }}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByText('GPT-4 Override').length).toBeGreaterThan(0);
+    });
+    expect(screen.getAllByText('Custom DB Model').length).toBeGreaterThan(0);
+    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining('/enabled-models'));
+    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining('/custom-models'));
+    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining('/model-overrides'));
+  });
+
+  it('handles fetch errors for model states/custom models/overrides', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    global.fetch = vi.fn().mockRejectedValue(new Error('network'));
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={{ ...defaultProvider, apiKeyId: 'key-1', hasApiKey: true }}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(errorSpy).toHaveBeenCalled();
+    });
+    errorSpy.mockRestore();
+  });
+
+  it('opens edit dialog and saves model override via POST', async () => {
+    const { toast } = await import('sonner');
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (String(url).includes('/model-overrides') && options?.method === 'POST') {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ success: true }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ models: [], overrides: [] }),
+      });
+    });
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={{ ...defaultProvider, apiKeyId: 'key-1', hasApiKey: true }}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('icon-PencilIcon').length).toBeGreaterThan(0);
+    });
+
+    const pencil = screen.getAllByTestId('icon-PencilIcon')[0];
+    const pencilBtn = pencil?.closest('button');
+    expect(pencilBtn).toBeTruthy();
+    fireEvent.click(pencilBtn as HTMLButtonElement);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('edit-model-dialog')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByTestId('save-model-edit'));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/settings/api-keys/key-1/model-overrides',
+        expect.objectContaining({ method: 'POST' }),
+      );
+    });
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith('Model updated successfully');
+    });
+  });
+
+  it('saves custom model edit via PUT and handles failure', async () => {
+    const { toast } = await import('sonner');
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (
+        String(url).includes('/custom-models') &&
+        !String(url).includes('/custom-models/') &&
+        !options?.method
+      ) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              models: [{ modelId: 'my-custom', displayName: 'My Custom' }],
+            }),
+        });
+      }
+      if (String(url).includes('/custom-models/my-custom') && options?.method === 'PUT') {
+        return Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve({ message: 'bad edit' }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ models: [], overrides: [] }),
+      });
+    });
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={{ ...defaultProvider, apiKeyId: 'key-1', hasApiKey: true }}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByText('My Custom').length).toBeGreaterThan(0);
+    });
+
+    // Prefer the pencil next to the custom model row
+    const pencils = screen.getAllByTestId('icon-PencilIcon');
+    const lastPencilBtn = pencils[pencils.length - 1]?.closest('button');
+    expect(lastPencilBtn).toBeTruthy();
+    fireEvent.click(lastPencilBtn as HTMLButtonElement);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('save-model-edit')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByTestId('save-model-edit'));
+
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalledWith(
+        'Failed to update model',
+        expect.objectContaining({ description: 'bad edit' }),
+      );
+    });
+  });
+
+  it('deletes custom model after confirmation', async () => {
+    const { toast } = await import('sonner');
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (
+        String(url).includes('/custom-models') &&
+        !String(url).includes('/custom-models/') &&
+        !options?.method
+      ) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              models: [{ modelId: 'del-me', displayName: 'Delete Me' }],
+            }),
+        });
+      }
+      if (String(url).includes('/custom-models/del-me') && options?.method === 'DELETE') {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve({}) });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ models: [], overrides: [] }),
+      });
+    });
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={{ ...defaultProvider, apiKeyId: 'key-1', hasApiKey: true }}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByText('Delete Me').length).toBeGreaterThan(0);
+    });
+
+    // Custom models render a trash button in the model row (provider delete is absent for non-custom)
+    const trashIcons = screen.getAllByTestId('icon-Trash2Icon');
+    const lastTrashBtn = trashIcons[trashIcons.length - 1]?.closest('button');
+    expect(lastTrashBtn).toBeTruthy();
+    fireEvent.click(lastTrashBtn as HTMLButtonElement);
+
+    await waitFor(() => {
+      expect(screen.getByText('Provider.delete_model_dialog_title')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText('Provider.delete_model_dialog_delete'));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/settings/api-keys/key-1/custom-models/del-me',
+        expect.objectContaining({ method: 'DELETE' }),
+      );
+    });
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith('Model Deleted');
+    });
+  });
+
+  it('handleDeleteProvider shows error toast on failure', async () => {
+    const { toast } = await import('sonner');
+    global.fetch = vi.fn().mockImplementation((url: string, options?: RequestInit) => {
+      if (url === '/api/settings/api-keys/custom-provider-key-id' && options?.method === 'DELETE') {
+        return Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve({ message: 'nope' }),
+        });
+      }
+      return Promise.resolve({ ok: true, json: () => Promise.resolve({ models: [] }) });
+    });
+
+    const customProvider: Provider = {
+      ...defaultProvider,
+      isCustom: true,
+      apiKeyId: 'custom-provider-key-id',
+    };
+
+    const { ProviderDetail } = await import('./ProviderDetail');
+    render(
+      <ProviderDetail
+        provider={customProvider}
+        onToggle={mockOnToggle}
+        onSave={mockOnSave}
+        onDelete={mockOnDelete}
+      />,
+    );
+
+    fireEvent.click(screen.getByTestId('icon-Trash2Icon').closest('button')!);
+    await waitFor(() => {
+      expect(screen.getByText('Provider.delete_provider_dialog_delete')).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText('Provider.delete_provider_dialog_delete'));
+
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalled();
+    });
+    expect(mockOnDelete).not.toHaveBeenCalled();
   });
 });
