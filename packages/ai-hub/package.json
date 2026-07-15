@@ -19,19 +19,19 @@
     "./models": "./src/providers/models.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.12",
-    "@ai-sdk/azure": "^4.0.11",
-    "@ai-sdk/deepseek": "^3.0.7",
-    "@ai-sdk/google-vertex": "^5.0.16",
-    "@ai-sdk/mistral": "^4.0.8",
-    "@ai-sdk/openai": "^4.0.11",
-    "@ai-sdk/openai-compatible": "^3.0.7",
+    "@ai-sdk/anthropic": "^4.0.15",
+    "@ai-sdk/azure": "^4.0.15",
+    "@ai-sdk/deepseek": "^3.0.11",
+    "@ai-sdk/google-vertex": "^5.0.20",
+    "@ai-sdk/mistral": "^4.0.11",
+    "@ai-sdk/openai": "^4.0.14",
+    "@ai-sdk/openai-compatible": "^3.0.10",
     "@ai-sdk/provider": "^4.0.3",
-    "@ai-sdk/xai": "^4.0.10",
+    "@ai-sdk/xai": "^4.0.13",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
-    "ai": "^7.0.22",
+    "ai": "^7.0.28",
     "zod": "^4.4.3"
   },
   "devDependencies": {
