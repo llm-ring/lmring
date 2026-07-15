@@ -6,12 +6,20 @@ import type { NextConfig } from 'next';
 import '@lmring/env/config';
 import { env } from '@lmring/env';
 
-const appVersion = JSON.parse(
-  readFileSync(resolve(import.meta.dirname, '../../package.json'), 'utf-8'),
-).version;
+const monorepoRoot = resolve(import.meta.dirname, '../..');
+
+const appVersion = JSON.parse(readFileSync(resolve(monorepoRoot, 'package.json'), 'utf-8')).version;
+
+// Vercel has its own deploy adapter and does not need standalone output.
+// Forcing standalone on Vercel (esp. Next canary + Turbopack) can fail in
+// onBuildComplete with: ENOENT .next/next-server.js.nft.json
+// Keep standalone for Docker / self-host (see Dockerfile).
+const isVercel = process.env.VERCEL === '1';
 
 const baseConfig: NextConfig = {
-  output: 'standalone',
+  ...(isVercel ? {} : { output: 'standalone' as const }),
+  // Trace from monorepo root so workspace packages are included in NFT output
+  outputFileTracingRoot: monorepoRoot,
   poweredByHeader: false,
   reactStrictMode: true,
   env: {
