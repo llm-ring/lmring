@@ -26,6 +26,10 @@
         "GOOGLE_CLIENT_SECRET",
         "GITHUB_CLIENT_ID",
         "GITHUB_CLIENT_SECRET",
+        "LINUXDO_CLIENT_ID",
+        "LINUXDO_CLIENT_SECRET",
+        "RESEND_API_KEY",
+        "EMAIL_FROM",
         "ANALYZE",
         "NEXT_PUBLIC_SUPABASE_URL",
         "NEXT_PUBLIC_SUPABASE_ANON_KEY",
@@ -37,10 +41,14 @@
         "NEXT_PUBLIC_DEPLOYMENT_MODE",
         "NEXT_PUBLIC_BETTER_STACK_SOURCE_TOKEN",
         "NEXT_PUBLIC_BETTER_STACK_INGESTING_HOST",
+        "NEXT_PUBLIC_LINUXDO_AUTH_ENABLED",
+        "NEXT_PUBLIC_EMAIL_ENABLED",
         "SENTRY_ORGANIZATION",
         "SENTRY_PROJECT",
         "SENTRY_AUTH_TOKEN",
-        "ARCJET_KEY"
+        "ARCJET_KEY",
+        "VERCEL",
+        "CI"
       ]
     },
     "start": {
