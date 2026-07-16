@@ -1446,7 +1446,11 @@ describe('ProviderDetail handler functions', () => {
       />,
     );
 
-    fireEvent.click(screen.getByTestId('icon-Trash2Icon').closest('button')!);
+    const deleteButton = screen.getByTestId('icon-Trash2Icon').closest('button');
+    if (!deleteButton) {
+      throw new Error('Expected delete provider button');
+    }
+    fireEvent.click(deleteButton);
     await waitFor(() => {
       expect(screen.getByText('Provider.delete_provider_dialog_delete')).toBeInTheDocument();
     });

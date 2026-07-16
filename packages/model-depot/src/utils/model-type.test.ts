@@ -7,10 +7,11 @@ describe('model-type utils', () => {
     const video = DEFAULT_MODEL_LIST.find((m) => m.type === 'video');
     const nonVideo = DEFAULT_MODEL_LIST.find((m) => m.type !== 'video');
 
-    expect(video).toBeDefined();
-    expect(nonVideo).toBeDefined();
-    expect(isVideoModel(video!.id)).toBe(true);
-    expect(isVideoModel(nonVideo!.id)).toBe(false);
+    if (!video || !nonVideo) {
+      throw new Error('Expected both video and non-video models in DEFAULT_MODEL_LIST');
+    }
+    expect(isVideoModel(video.id)).toBe(true);
+    expect(isVideoModel(nonVideo.id)).toBe(false);
     expect(isVideoModel('definitely-missing-model')).toBe(false);
   });
 
@@ -25,7 +26,11 @@ describe('model-type utils', () => {
       );
     } else {
       // still exercise false path when list has no runtime ids
-      expect(getRuntimeModelId(DEFAULT_MODEL_LIST[0]!.id)).toBeNull();
+      const first = DEFAULT_MODEL_LIST[0];
+      if (!first) {
+        throw new Error('DEFAULT_MODEL_LIST is empty');
+      }
+      expect(getRuntimeModelId(first.id)).toBeNull();
     }
   });
 
@@ -39,7 +44,11 @@ describe('model-type utils', () => {
         (withProvider as { runtimeProvider: string }).runtimeProvider,
       );
     } else {
-      expect(getRuntimeProvider(DEFAULT_MODEL_LIST[0]!.id)).toBeNull();
+      const first = DEFAULT_MODEL_LIST[0];
+      if (!first) {
+        throw new Error('DEFAULT_MODEL_LIST is empty');
+      }
+      expect(getRuntimeProvider(first.id)).toBeNull();
     }
   });
 });

@@ -166,7 +166,11 @@ describe('ModelCard', () => {
       <ModelCard modelId="openai:gpt-4o" models={models} synced onSyncToggle={onSyncToggle} />,
     );
 
-    fireEvent.click(screen.getByTestId('icon-ToggleRightIcon').closest('button')!);
+    const syncToggle = screen.getByTestId('icon-ToggleRightIcon').closest('button');
+    if (!syncToggle) {
+      throw new Error('Expected sync toggle button');
+    }
+    fireEvent.click(syncToggle);
     expect(onSyncToggle).toHaveBeenCalledWith(false);
 
     fireEvent.click(screen.getByTestId('model-selector-trigger'));
@@ -190,15 +194,23 @@ describe('ModelCard', () => {
       />,
     );
 
-    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    const openMenu = (): void => {
+      const menuButton = screen.getByTestId('icon-MoreHorizontalIcon').closest('button');
+      if (!menuButton) {
+        throw new Error('Expected model card menu button');
+      }
+      fireEvent.click(menuButton);
+    };
+
+    openMenu();
     fireEvent.click(screen.getByText('Move Left'));
     expect(onMoveLeft).toHaveBeenCalled();
 
-    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    openMenu();
     fireEvent.click(screen.getByText('Move Right'));
     expect(onMoveRight).toHaveBeenCalled();
 
-    fireEvent.click(screen.getByTestId('icon-MoreHorizontalIcon').closest('button')!);
+    openMenu();
     fireEvent.click(screen.getByText('Delete Chat'));
     expect(onDelete).toHaveBeenCalled();
   });

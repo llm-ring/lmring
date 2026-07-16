@@ -142,7 +142,11 @@ describe('SharedWebDevView', () => {
     ]);
 
     render(<SharedWebDevView {...baseProps} />);
-    fireEvent.click(screen.getAllByText('claude')[0]!);
+    const claudeCard = screen.getAllByText('claude')[0];
+    if (!claudeCard) {
+      throw new Error('Expected claude response card');
+    }
+    fireEvent.click(claudeCard);
     expect(screen.getByTitle('Preview - anthropic:claude')).toBeInTheDocument();
   });
 
@@ -162,11 +166,15 @@ describe('SharedWebDevView', () => {
   });
 
   it('shows empty code view when active response has no files', () => {
+    const firstResponse = baseProps.responses[0];
+    if (!firstResponse) {
+      throw new Error('Expected at least one response in baseProps');
+    }
     const props = {
       ...baseProps,
       responses: [
         {
-          ...baseProps.responses[0]!,
+          ...firstResponse,
           files: null,
         },
       ],
