@@ -43,14 +43,28 @@ vi.mock('./complete-profile/actions', () => ({
   verifyProfileOTP: mocks.verifyProfileOTP,
 }));
 
+function getFormByButtonName(name: string): HTMLFormElement {
+  const form = screen.getByRole('button', { name }).closest('form');
+  if (!(form instanceof HTMLFormElement)) {
+    throw new Error(`Expected form for button "${name}"`);
+  }
+  return form;
+}
+
+function getNthButtonByName(name: string, index: number): HTMLElement {
+  const button = screen.getAllByRole('button', { name })[index];
+  if (!button) {
+    throw new Error(`Expected button "${name}" at index ${index}`);
+  }
+  return button;
+}
+
 async function advanceForgotPasswordToVerify(): Promise<void> {
   render(<ForgotPasswordForm />);
   fireEvent.change(screen.getByLabelText('ForgotPassword.email_label'), {
     target: { value: 'person@example.com' },
   });
-  fireEvent.submit(
-    screen.getByRole('button', { name: 'ForgotPassword.send_code_button' }).closest('form')!,
-  );
+  fireEvent.submit(getFormByButtonName('ForgotPassword.send_code_button'));
   await screen.findByText('ForgotPassword.verify_title');
 }
 
@@ -59,9 +73,7 @@ async function advanceCompleteProfileToVerify(): Promise<void> {
   fireEvent.change(screen.getByLabelText('CompleteProfile.email_label'), {
     target: { value: 'ada@example.com' },
   });
-  fireEvent.submit(
-    screen.getByRole('button', { name: 'CompleteProfile.submit_button' }).closest('form')!,
-  );
+  fireEvent.submit(getFormByButtonName('CompleteProfile.submit_button'));
   await screen.findByText('CompleteProfile.verify_title');
 }
 
@@ -85,9 +97,7 @@ describe('ForgotPasswordForm', () => {
     fireEvent.change(screen.getByLabelText('ForgotPassword.email_label'), {
       target: { value: 'missing@example.com' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.send_code_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('ForgotPassword.send_code_button'));
     expect(await screen.findByText('Unknown account')).toBeInTheDocument();
     unmount();
 
@@ -96,9 +106,7 @@ describe('ForgotPasswordForm', () => {
     fireEvent.change(screen.getByLabelText('ForgotPassword.email_label'), {
       target: { value: 'person@example.com' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.send_code_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('ForgotPassword.send_code_button'));
     expect(await screen.findByText('An unexpected error occurred')).toBeInTheDocument();
   });
 
@@ -112,13 +120,11 @@ describe('ForgotPasswordForm', () => {
     const confirmation = screen.getByLabelText('ForgotPassword.confirm_password_label');
     fireEvent.change(password, { target: { value: 'StrongPass1!' } });
     fireEvent.change(confirmation, { target: { value: 'Different1!' } });
-    fireEvent.click(screen.getAllByRole('button', { name: 'Show password' })[0]!);
+    fireEvent.click(getNthButtonByName('Show password', 0));
     expect(password).toHaveAttribute('type', 'text');
     fireEvent.click(screen.getByRole('button', { name: 'Hide password' }));
-    fireEvent.click(screen.getAllByRole('button', { name: 'Show password' })[1]!);
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.reset_button' }).closest('form')!,
-    );
+    fireEvent.click(getNthButtonByName('Show password', 1));
+    fireEvent.submit(getFormByButtonName('ForgotPassword.reset_button'));
     expect(await screen.findByText('ForgotPassword.passwords_mismatch')).toBeInTheDocument();
     expect(mocks.resetPassword).not.toHaveBeenCalled();
   });
@@ -134,9 +140,7 @@ describe('ForgotPasswordForm', () => {
     fireEvent.change(screen.getByLabelText('ForgotPassword.confirm_password_label'), {
       target: { value: 'weak' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.reset_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('ForgotPassword.reset_button'));
     await waitFor(() => expect(mocks.resetPassword).not.toHaveBeenCalled());
     expect(screen.getAllByText(/At least 8 characters/).length).toBeGreaterThan(0);
   });
@@ -153,15 +157,11 @@ describe('ForgotPasswordForm', () => {
     fireEvent.change(screen.getByLabelText('ForgotPassword.confirm_password_label'), {
       target: { value: 'StrongPass1!' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.reset_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('ForgotPassword.reset_button'));
     expect(await screen.findByText('Expired code')).toBeInTheDocument();
 
     mocks.resetPassword.mockResolvedValueOnce({ data: {}, error: null });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'ForgotPassword.reset_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('ForgotPassword.reset_button'));
     expect(await screen.findByText('ForgotPassword.success_title')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'ForgotPassword.sign_in_link' })).toHaveAttribute(
       'href',
@@ -202,9 +202,7 @@ describe('VerifyEmailForm', () => {
     const input = screen.getByLabelText('VerifyEmail.otp_label');
     fireEvent.change(input, { target: { value: 'a1234567' } });
     expect(input).toHaveValue('123456');
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'VerifyEmail.verify_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('VerifyEmail.verify_button'));
     await waitFor(() => expect(mocks.routerPush).toHaveBeenCalledWith('/arena'));
     expect(mocks.routerRefresh).toHaveBeenCalled();
   });
@@ -215,9 +213,7 @@ describe('VerifyEmailForm', () => {
     fireEvent.change(screen.getByLabelText('VerifyEmail.otp_label'), {
       target: { value: '123456' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'VerifyEmail.verify_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('VerifyEmail.verify_button'));
     expect(await screen.findByText('Invalid verification code')).toBeInTheDocument();
     unmount();
 
@@ -226,9 +222,7 @@ describe('VerifyEmailForm', () => {
     fireEvent.change(screen.getByLabelText('VerifyEmail.otp_label'), {
       target: { value: '123456' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'VerifyEmail.verify_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('VerifyEmail.verify_button'));
     expect(await screen.findByText('An unexpected error occurred')).toBeInTheDocument();
   });
 
@@ -265,9 +259,7 @@ describe('CompleteProfileForm', () => {
     fireEvent.change(screen.getByLabelText('CompleteProfile.email_label'), {
       target: { value: 'ada@example.com' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'CompleteProfile.submit_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('CompleteProfile.submit_button'));
     expect(await screen.findByText('Email unavailable')).toBeInTheDocument();
   });
 
@@ -278,9 +270,7 @@ describe('CompleteProfileForm', () => {
     expect(otpInput).toHaveValue('123456');
 
     mocks.verifyProfileOTP.mockResolvedValueOnce({ success: false });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'CompleteProfile.verify_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('CompleteProfile.verify_button'));
     expect(await screen.findByText('Invalid verification code')).toBeInTheDocument();
 
     mocks.sendProfileOTP.mockRejectedValueOnce(new Error('network'));
@@ -295,9 +285,7 @@ describe('CompleteProfileForm', () => {
     fireEvent.change(screen.getByLabelText('CompleteProfile.email_label'), {
       target: { value: 'ada@example.com' },
     });
-    fireEvent.submit(
-      screen.getByRole('button', { name: 'CompleteProfile.submit_button' }).closest('form')!,
-    );
+    fireEvent.submit(getFormByButtonName('CompleteProfile.submit_button'));
     expect(await screen.findByText('Failed to update email')).toBeInTheDocument();
     expect(mocks.updateProfileEmail).toHaveBeenCalledWith('ada@example.com');
   });

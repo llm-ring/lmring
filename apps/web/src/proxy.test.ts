@@ -313,20 +313,21 @@ describe('proxy', () => {
 
     const protectedPaths = ['/arena', '/account', '/settings', '/history'];
 
-    it.each(
-      protectedPaths,
-    )('should redirect unauthenticated user from %s to /sign-in', async (path) => {
-      mockGetSession.mockResolvedValue(null);
+    it.each(protectedPaths)(
+      'should redirect unauthenticated user from %s to /sign-in',
+      async (path) => {
+        mockGetSession.mockResolvedValue(null);
 
-      const { default: proxy } = await import('./proxy');
-      const request = createMockRequest(path);
-      const response = await proxy(request, createMockEvent());
+        const { default: proxy } = await import('./proxy');
+        const request = createMockRequest(path);
+        const response = await proxy(request, createMockEvent());
 
-      expect(response.status).toBe(307);
-      const location = response.headers.get('location');
-      expect(location).toContain('/sign-in');
-      expect(location).toContain(`callbackUrl=${encodeURIComponent(path)}`);
-    });
+        expect(response.status).toBe(307);
+        const location = response.headers.get('location');
+        expect(location).toContain('/sign-in');
+        expect(location).toContain(`callbackUrl=${encodeURIComponent(path)}`);
+      },
+    );
 
     it.each(protectedPaths)('should allow authenticated user to access %s', async (path) => {
       mockGetSession.mockResolvedValue({

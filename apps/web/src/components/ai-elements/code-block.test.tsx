@@ -140,7 +140,11 @@ describe('CodeBlock components', () => {
       </CodeBlock>,
     );
     await act(async () => {
-      fireEvent.click(screen.getAllByRole('button').at(-1)!);
+      const lastButton = screen.getAllByRole('button').at(-1);
+      if (!lastButton) {
+        throw new Error('Expected at least one button');
+      }
+      fireEvent.click(lastButton);
     });
     expect(onError).toHaveBeenCalled();
     vi.unstubAllGlobals();
