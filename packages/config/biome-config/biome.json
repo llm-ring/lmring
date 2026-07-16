@@ -1,5 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.1/schema.json",
+  "root": false,
+  "$schema": "https://biomejs.dev/schemas/2.5.4/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,7 +8,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/node_modules/**", "!**/.next/**", "!**/dist/**", "!**/build/**", "!**/coverage/**"]
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/.next/**",
+      "!**/dist/**",
+      "!**/build/**",
+      "!**/coverage/**"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -26,7 +34,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "correctness": {
         "noUnusedVariables": "error",
         "useExhaustiveDependencies": "warn"
@@ -58,4 +66,3 @@
     }
   }
 }
-
