@@ -3,7 +3,7 @@
 import "./style.css";
 import * as React from "react";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
-import { Select as SelectPrimitive } from "radix-ui";
+import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cn } from "../../utils";
 

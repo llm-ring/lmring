@@ -1,7 +1,7 @@
 'use client';
 import "./style.css";
 import * as React from 'react';
-import {AlertDialog as AlertDialogPrimitive} from 'radix-ui';
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '../../utils';

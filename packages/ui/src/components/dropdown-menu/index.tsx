@@ -2,7 +2,7 @@
 
 import "./style.css";
 import * as React from "react";
-import {DropdownMenu as DropdownMenuPrimitive} from "radix-ui";
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import {
   CheckIcon,
   ChevronRightIcon,
