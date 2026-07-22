@@ -72,7 +72,7 @@
     "@types/node": "^26.1.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.0.4",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
     "checkly": "^8.17.1",
