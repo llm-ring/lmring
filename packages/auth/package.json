@@ -35,7 +35,7 @@
     "resend": "^6.18.0"
   },
   "peerDependencies": {
-    "react": "^19.2.7"
+    "react": "^19.2.8"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
