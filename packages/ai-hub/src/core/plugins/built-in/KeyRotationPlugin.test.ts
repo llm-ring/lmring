@@ -137,6 +137,7 @@ describe('KeyRotationPlugin', () => {
 
   describe('cooldownPeriod', () => {
     it('re-enables keys after cooldown', async () => {
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       vi.useFakeTimers();
       const plugin = new KeyRotationPlugin({
         keys: ['key1'],
@@ -156,6 +157,7 @@ describe('KeyRotationPlugin', () => {
       const result = await plugin.transformParams({}, ctx);
       expect(result.apiKey).toBe('key1');
 
+      consoleSpy.mockRestore();
       vi.useRealTimers();
     });
   });
@@ -221,6 +223,7 @@ describe('KeyRotationPlugin', () => {
 
   describe('no available keys', () => {
     it('throws when all keys are disabled', async () => {
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       vi.useFakeTimers();
       const plugin = new KeyRotationPlugin({
         keys: ['key1'],
@@ -238,6 +241,7 @@ describe('KeyRotationPlugin', () => {
       const ctx = { ...context, metadata: {} };
       await expect(plugin.transformParams({}, ctx)).rejects.toThrow('No available API keys');
 
+      consoleSpy.mockRestore();
       vi.useRealTimers();
     });
   });

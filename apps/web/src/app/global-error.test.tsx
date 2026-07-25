@@ -21,12 +21,7 @@ vi.mock('next/error', () => ({
 describe('GlobalError', () => {
   it('should render NextError component with statusCode 0', () => {
     const error = new Error('Test error');
-    // GlobalError renders <html> and <body>, which causes hydration warnings
-    // when rendered inside React Testing Library's div container.
-    // These warnings are expected in tests.
-    render(<GlobalError error={error} />, {
-      container: document.body,
-    });
+    render(<GlobalError error={error} />);
 
     expect(screen.getByTestId('next-error')).toBeInTheDocument();
     expect(screen.getByText('Error 0')).toBeInTheDocument();
@@ -36,9 +31,7 @@ describe('GlobalError', () => {
     const Sentry = await import('@sentry/nextjs');
     const error = new Error('Test error');
 
-    render(<GlobalError error={error} />, {
-      container: document.body,
-    });
+    render(<GlobalError error={error} />);
 
     expect(Sentry.captureException).toHaveBeenCalledWith(error);
   });
@@ -47,9 +40,7 @@ describe('GlobalError', () => {
     const Sentry = await import('@sentry/nextjs');
     const error = Object.assign(new Error('Test error'), { digest: 'test-digest' });
 
-    render(<GlobalError error={error} />, {
-      container: document.body,
-    });
+    render(<GlobalError error={error} />);
 
     expect(Sentry.captureException).toHaveBeenCalledWith(error);
   });

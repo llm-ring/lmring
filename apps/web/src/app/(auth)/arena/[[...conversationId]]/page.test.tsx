@@ -397,11 +397,19 @@ describe('ArenaPage', () => {
     mockSettingsState = createMockSettingsState();
     mockWorkflowState = createMockWorkflowState();
     mockVoteState = createMockVoteState();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ enabledModels: {}, customModels: {}, overrides: {} }),
+      }),
+    );
     vi.clearAllMocks();
   });
 
   afterEach(() => {
     cleanup();
+    vi.unstubAllGlobals();
   });
 
   it('should render loading skeleton when not initialized', async () => {

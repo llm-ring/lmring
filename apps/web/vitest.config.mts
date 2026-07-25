@@ -16,6 +16,7 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
+    silent: 'passed-only',
     setupFiles: ['./vitest.setup.ts'],
     testTimeout: 10000,
     hookTimeout: 15000,

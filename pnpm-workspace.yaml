@@ -3,6 +3,17 @@ packages:
   - packages/*
   - packages/config/*
 
+allowedDeprecatedVersions:
+  '@esbuild-kit/core-utils': 3.3.2
+  '@esbuild-kit/esm-loader': 2.6.5
+  '@testing-library/jest-dom': 6.10.0
+  intersection-observer: 0.12.2
+  node-domexception: 1.0.0
+
+peerDependencyRules:
+  allowedVersions:
+    '@emoji-mart/react>react': 19.2.8
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@sentry/cli'
@@ -10,3 +21,5 @@ onlyBuiltDependencies:
   - core-js
   - esbuild
   - sharp
+  - '@prisma/engines'
+  - prisma

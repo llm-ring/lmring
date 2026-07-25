@@ -19,19 +19,19 @@
     "./models": "./src/providers/models.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.16",
-    "@ai-sdk/azure": "^4.0.17",
-    "@ai-sdk/deepseek": "^3.0.12",
-    "@ai-sdk/google-vertex": "^5.0.22",
-    "@ai-sdk/mistral": "^4.0.13",
-    "@ai-sdk/openai": "^4.0.16",
-    "@ai-sdk/openai-compatible": "^3.0.12",
+    "@ai-sdk/anthropic": "^4.0.20",
+    "@ai-sdk/azure": "^4.0.21",
+    "@ai-sdk/deepseek": "^3.0.13",
+    "@ai-sdk/google-vertex": "^5.0.30",
+    "@ai-sdk/mistral": "^4.0.14",
+    "@ai-sdk/openai": "^4.0.20",
+    "@ai-sdk/openai-compatible": "^3.0.14",
     "@ai-sdk/provider": "^4.0.3",
-    "@ai-sdk/xai": "^4.0.16",
+    "@ai-sdk/xai": "^4.0.18",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
-    "ai": "^7.0.31",
+    "ai": "^7.0.37",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "@lmring/vitest-config": "workspace:*",
     "@types/node": "^26.1.1",
     "@vitest/coverage-v8": "^4.1.10",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.2",
     "vitest": "^4.1.10"
   }
 }
