@@ -19,10 +19,10 @@
     "./models": "./src/providers/models.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.20",
+    "@ai-sdk/anthropic": "^4.0.21",
     "@ai-sdk/azure": "^4.0.21",
     "@ai-sdk/deepseek": "^3.0.13",
-    "@ai-sdk/google-vertex": "^5.0.30",
+    "@ai-sdk/google-vertex": "^5.0.31",
     "@ai-sdk/mistral": "^4.0.14",
     "@ai-sdk/openai": "^4.0.20",
     "@ai-sdk/openai-compatible": "^3.0.14",
@@ -39,7 +39,7 @@
     "@lmring/vitest-config": "workspace:*",
     "@types/node": "^26.1.1",
     "@vitest/coverage-v8": "^4.1.10",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.10"
   }
 }

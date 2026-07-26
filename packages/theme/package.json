@@ -48,7 +48,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "fast-check": "^4.9.0",
     "tsdown": "0.22.14",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.10"
   }
 }

@@ -97,7 +97,7 @@ describe('useWebDevSandbox', () => {
     mocks.activeWorkflowId = null;
     mocks.workflows.clear();
     mocks.getSandbox.mockReturnValue(null);
-    fetchSpy = vi.spyOn(globalThis, 'fetch');
+    fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true } as Response);
   });
 
   afterEach(() => {

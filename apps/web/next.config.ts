@@ -52,19 +52,6 @@ const baseConfig: NextConfig = {
       ],
     },
   ],
-  experimental: {
-    useTypeScriptCli: true,
-    optimizePackageImports: [
-      'lucide-react',
-      '@lobehub/icons',
-      '@lobehub/ui',
-      '@radix-ui/react-icons',
-      'recharts',
-      'date-fns',
-      '@lmring/ui',
-      '@lmring/model-depot',
-    ],
-  },
   transpilePackages: [
     '@lmring/database',
     '@lmring/ui',
