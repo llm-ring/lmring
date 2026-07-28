@@ -22,6 +22,10 @@ const baseConfig: NextConfig = {
   outputFileTracingRoot: monorepoRoot,
   poweredByHeader: false,
   reactStrictMode: true,
+  // TypeScript 7 has no JS compiler API; next build must use the local tsc CLI.
+  experimental: {
+    useTypeScriptCli: true,
+  },
   env: {
     NEXT_PUBLIC_APP_VERSION: appVersion,
   },
