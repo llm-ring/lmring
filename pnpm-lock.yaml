@@ -320,8 +320,8 @@ importers:
         specifier: ^0.45.2
         version: 0.45.2(@electric-sql/pglite@0.3.15)(@opentelemetry/api@1.9.1)(@prisma/client@7.4.2(prisma@7.4.2(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2))(typescript@7.0.2))(@types/pg@8.20.0)(kysely@0.29.4)(mysql2@3.15.3)(postgres@3.4.9)(prisma@7.4.2(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@7.0.2))
       resend:
-        specifier: ^6.18.0
-        version: 6.18.0
+        specifier: ^6.18.1
+        version: 6.18.1
     devDependencies:
       '@lmring/typescript-config':
         specifier: workspace:*
@@ -9238,8 +9238,8 @@ packages:
   reselect@5.2.0:
     resolution: {integrity: sha512-AgZ3UOZm3YndfrJ4OYjgrT7bmCm/1iqkjvEfH/oYjzh6PD2qw4QuT3jjnXIrpdt4MTpMXclMT3lXbmRY+XRakw==}
 
-  resend@6.18.0:
-    resolution: {integrity: sha512-EjxZ9AVzywJgOlUoIJe9ytBWVrfbUtJbjeoLnRSvpU1sv97Hh9DSwhw+k8kiujrG4Rg4bzTBsjlmwWWuoOxSug==}
+  resend@6.18.1:
+    resolution: {integrity: sha512-XN8XIaDdKF+ziSQ3K23ndUcyhP7U3ze2gky6SPgYkuAOq54mH4Wdhwm7QylEQ3zlz0NzdX7/l1AgmJUZbdPI/Q==}
     engines: {node: '>=20'}
     peerDependencies:
       '@react-email/render': '*'
@@ -13350,7 +13350,7 @@ snapshots:
   '@rc-component/collapse@1.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
       react: 19.2.8
@@ -13372,7 +13372,7 @@ snapshots:
 
   '@rc-component/dialog@1.5.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/portal': 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
@@ -13381,7 +13381,7 @@ snapshots:
 
   '@rc-component/drawer@1.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/portal': 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
@@ -13406,7 +13406,7 @@ snapshots:
 
   '@rc-component/image@1.5.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/portal': 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
@@ -13441,7 +13441,7 @@ snapshots:
 
   '@rc-component/menu@1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/overflow': 1.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/trigger': 3.10.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -13475,7 +13475,7 @@ snapshots:
 
   '@rc-component/notification@1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
       react: 19.2.8
@@ -13554,7 +13554,7 @@ snapshots:
   '@rc-component/segmented@1.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
       react: 19.2.8
@@ -13605,7 +13605,7 @@ snapshots:
     dependencies:
       '@rc-component/dropdown': 1.0.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/menu': 1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/resize-observer': 1.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
@@ -13649,7 +13649,7 @@ snapshots:
 
   '@rc-component/tree@1.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@rc-component/motion': 1.3.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/util': 1.12.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rc-component/virtual-list': 1.4.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
@@ -19477,7 +19477,7 @@ snapshots:
 
   reselect@5.2.0: {}
 
-  resend@6.18.0:
+  resend@6.18.1:
     dependencies:
       postal-mime: 2.7.5
       standardwebhooks: 1.0.0
