@@ -454,7 +454,7 @@ importers:
         specifier: ^26.3.6
         version: 26.3.6(typescript@7.0.2)
       react:
-        specifier: ^19.2.7
+        specifier: ^19.2.8
         version: 19.2.8
       react-i18next:
         specifier: ^17.0.11
