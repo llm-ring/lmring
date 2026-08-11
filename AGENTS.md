@@ -118,7 +118,7 @@ Built with modern technologies:
 ## Important Notes
 
 - **Node.js**: v24.11.1+
-- **Package Manager**: pnpm 10.28.2
+- **Package Manager**: pnpm 10.34.0
 - **Auth**: OAuth (GitHub, Google, Linux.do) and Email OTP (Resend); all providers are optional and configured via environment variables
 
 ## Resources

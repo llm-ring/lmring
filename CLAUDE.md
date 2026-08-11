@@ -103,5 +103,5 @@ pnpm test:e2e         # Run E2E tests
 ## Important Notes
 
 - **Node.js**: v24.11.1+
-- **Package Manager**: pnpm 10.28.2
+- **Package Manager**: pnpm 10.34.0
 - **Dev Server**: Turbopack
