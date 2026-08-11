@@ -39,5 +39,5 @@
     "lint-staged": "^17.3.0",
     "turbo": "^2.10.9"
   },
-  "packageManager": "pnpm@10.34.0"
+  "packageManager": "pnpm@10.34.5"
 }
