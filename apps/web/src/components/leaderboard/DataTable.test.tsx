@@ -1,6 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import type { LeaderboardTableFeatures } from './table-features';
 
 const { createMockIcon } = vi.hoisted(() => ({
   createMockIcon: (name: string) => {
@@ -27,7 +28,7 @@ type TestData = {
   score: number;
 };
 
-const testColumns: ColumnDef<TestData>[] = [
+const testColumns: ColumnDef<LeaderboardTableFeatures, TestData>[] = [
   {
     accessorKey: 'id',
     header: () => <span>ID</span>,

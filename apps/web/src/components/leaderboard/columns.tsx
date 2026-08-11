@@ -6,6 +6,7 @@ import { CheckIcon, ChevronDown, ChevronUp, LockIcon, UnlockIcon, XIcon } from '
 import { ProviderIcon } from '@/components/arena/provider-icon';
 import type { TranslationFunction } from '@/hooks/use-translations';
 import { formatMetricValue, getNumericValue, type MetricConfig } from '@/libs/zeroeval-api';
+import type { LeaderboardTableFeatures } from './table-features';
 import type { LeaderboardModel } from './types';
 
 // Rank cell with medal styling
@@ -157,7 +158,9 @@ function SortableHeader({
 }
 
 // Create base columns
-export function createBaseColumns(t: TranslationFunction): ColumnDef<LeaderboardModel>[] {
+export function createBaseColumns(
+  t: TranslationFunction,
+): ColumnDef<LeaderboardTableFeatures, LeaderboardModel>[] {
   return [
     {
       accessorKey: 'rank',
@@ -186,7 +189,7 @@ export function createBaseColumns(t: TranslationFunction): ColumnDef<Leaderboard
 export function createMetricColumns(
   metrics: MetricConfig[],
   t: TranslationFunction,
-): ColumnDef<LeaderboardModel>[] {
+): ColumnDef<LeaderboardTableFeatures, LeaderboardModel>[] {
   return metrics.map((metric) => ({
     accessorKey: metric.field,
     header: ({ column }) => (
@@ -204,7 +207,7 @@ export function createMetricColumns(
     },
     size: 100,
     minSize: 80,
-    sortingFn: (rowA, rowB) => {
+    sortFn: (rowA, rowB) => {
       const a = getNumericValue(
         rowA.original[metric.field as keyof LeaderboardModel] as string | number | null,
       );
@@ -220,7 +223,9 @@ export function createMetricColumns(
 }
 
 // Create trailing columns
-export function createTrailingColumns(t: TranslationFunction): ColumnDef<LeaderboardModel>[] {
+export function createTrailingColumns(
+  t: TranslationFunction,
+): ColumnDef<LeaderboardTableFeatures, LeaderboardModel>[] {
   return [
     {
       accessorKey: 'knowledge_cutoff',

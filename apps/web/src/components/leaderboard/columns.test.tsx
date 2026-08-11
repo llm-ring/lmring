@@ -399,7 +399,7 @@ describe('ScoreCell', () => {
     const columns = createMetricColumns(metrics, mockT);
     // biome-ignore lint/style/noNonNullAssertion: test - column existence verified
     const metricColumn = columns[0]!;
-    const sortingFn = metricColumn.sortingFn as unknown as (
+    const sortingFn = metricColumn.sortFn as unknown as (
       rowA: { original: LeaderboardModel & { input_price: string } },
       rowB: { original: LeaderboardModel & { input_price: string } },
     ) => number;

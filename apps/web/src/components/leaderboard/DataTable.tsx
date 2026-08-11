@@ -3,21 +3,19 @@
 import { cn } from '@lmring/ui';
 import {
   type ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   type OnChangeFn,
+  type RowData,
   type SortingState,
-  useReactTable,
+  useTable,
 } from '@tanstack/react-table';
 import { useEventListener, useMemoizedFn, useRafState, useResetState } from 'ahooks';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from '@/hooks/use-translations';
+import { type LeaderboardTableFeatures, leaderboardTableFeatures } from './table-features';
 
-interface DataTableProps<TData> {
-  columns: ColumnDef<TData>[];
+interface DataTableProps<TData extends RowData> {
+  columns: ColumnDef<LeaderboardTableFeatures, TData>[];
   data: TData[];
   pageSize?: number;
   sorting?: SortingState;
@@ -25,7 +23,7 @@ interface DataTableProps<TData> {
   manualSorting?: boolean;
 }
 
-export function DataTable<TData>({
+export function DataTable<TData extends RowData>({
   columns,
   data,
   pageSize = 20,
@@ -43,18 +41,19 @@ export function DataTable<TData>({
   const sorting = controlledSorting ?? uncontrolledSorting;
   const handleSortingChange = onSortingChange ?? setUncontrolledSorting;
 
-  const table = useReactTable({
-    data,
-    columns,
-    columnResizeMode: 'onChange',
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: manualSorting ? undefined : getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: handleSortingChange,
-    manualSorting,
-    state: { sorting },
-    initialState: { pagination: { pageSize } },
-  });
+  const table = useTable(
+    {
+      features: leaderboardTableFeatures,
+      data,
+      columns,
+      columnResizeMode: 'onChange',
+      onSortingChange: handleSortingChange,
+      manualSorting,
+      state: { sorting },
+      initialState: { pagination: { pageIndex: 0, pageSize } },
+    },
+    (state) => state,
+  );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally resets page index when sorting changes
   useEffect(() => {
@@ -90,7 +89,7 @@ export function DataTable<TData>({
   useEventListener('mouseup', resetResizeState, { target: document });
   useEventListener('touchend', resetResizeState, { target: document });
 
-  const currentPage = table.getState().pagination.pageIndex;
+  const currentPage = table.state.pagination.pageIndex;
   const totalPages = table.getPageCount();
 
   return (
@@ -139,9 +138,7 @@ export function DataTable<TData>({
                       )}
 
                       <span className="relative z-10">
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.isPlaceholder ? null : <table.FlexRender header={header} />}
                       </span>
 
                       {/* Enhanced column resize handle */}
@@ -186,7 +183,7 @@ export function DataTable<TData>({
                   idx % 2 === 0 ? 'bg-background' : 'bg-muted/10',
                 )}
               >
-                {row.getVisibleCells().map((cell) => {
+                {row.getAllCells().map((cell) => {
                   const isColumnResizing = resizingColumnId === cell.column.id;
                   const anyResizing = resizingColumnId !== null;
 
@@ -200,7 +197,7 @@ export function DataTable<TData>({
                       )}
                       style={{ width: cell.column.getSize() }}
                     >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      <table.FlexRender cell={cell} />
                     </td>
                   );
                 })}
@@ -213,8 +210,8 @@ export function DataTable<TData>({
       {/* Pagination */}
       <div className="flex items-center justify-between px-1 pt-2">
         <span className="text-xs tabular-nums text-muted-foreground/70 tracking-tight">
-          {table.getState().pagination.pageIndex * pageSize + 1}–
-          {Math.min((table.getState().pagination.pageIndex + 1) * pageSize, data.length)}{' '}
+          {table.state.pagination.pageIndex * pageSize + 1}–
+          {Math.min((table.state.pagination.pageIndex + 1) * pageSize, data.length)}{' '}
           <span className="text-muted-foreground/50">{t('Leaderboard.pagination_of')}</span>{' '}
           {data.length}
         </span>
