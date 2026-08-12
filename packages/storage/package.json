@@ -14,7 +14,7 @@
     "dependencies": {
         "@aws-sdk/client-s3": "^3.1107.0",
         "@aws-sdk/s3-request-presigner": "^3.1107.0",
-        "@supabase/supabase-js": "^2.112.2"
+        "@supabase/supabase-js": "^2.112.3"
     },
     "devDependencies": {
         "@lmring/typescript-config": "workspace:*",

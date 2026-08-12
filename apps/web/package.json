@@ -36,7 +36,7 @@
     "@logtape/logtape": "^2.3.0",
     "@sentry/nextjs": "^10.70.0",
     "@supabase/ssr": "^0.12.4",
-    "@supabase/supabase-js": "^2.112.2",
+    "@supabase/supabase-js": "^2.112.3",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^9.1.2",
     "@vercel/sandbox": "^3.0.0",
