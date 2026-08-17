@@ -3,7 +3,7 @@
 # ================================
 # Stage 1: Dependencies
 # ================================
-FROM node:24.16.0-alpine AS deps
+FROM node:24.19.0-alpine AS deps
 
 # Install dependencies required for native modules
 RUN apk add --no-cache libc6-compat
@@ -38,7 +38,7 @@ RUN pnpm install --frozen-lockfile
 # ================================
 # Stage 2: Builder
 # ================================
-FROM node:24.16.0-alpine AS builder
+FROM node:24.19.0-alpine AS builder
 
 WORKDIR /app
 
@@ -71,7 +71,7 @@ RUN pnpm --filter @lmring/web build
 # ================================
 # Stage 3: Runner
 # ================================
-FROM node:24.16.0-alpine AS runner
+FROM node:24.19.0-alpine AS runner
 
 WORKDIR /app
 
