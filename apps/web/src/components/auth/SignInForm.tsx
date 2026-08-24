@@ -83,8 +83,8 @@ export function SignInForm({
     setLoading(true);
 
     try {
-      const result = await authClient.signIn.oauth2({
-        providerId: 'linuxdo',
+      const result = await authClient.signIn.social({
+        provider: 'linuxdo',
         callbackURL: safeCallbackUrl,
         errorCallbackURL: '/sign-in',
       });

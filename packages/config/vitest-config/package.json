@@ -12,9 +12,9 @@
     "react.mts"
   ],
   "dependencies": {
-    "@vitejs/plugin-react": "^6.0.5",
-    "@vitest/coverage-v8": "^4.1.10",
-    "happy-dom": "20.11.2",
-    "vitest": "^4.1.10"
+    "@vitejs/plugin-react": "^6.1.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "happy-dom": "20.11.6",
+    "vitest": "^4.1.11"
   }
 }

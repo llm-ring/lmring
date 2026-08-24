@@ -4,11 +4,10 @@
 
 'use client';
 
-import type { AuthClient } from '@lmring/auth';
 import { createClient } from '@lmring/auth/client';
 import { getAuthBaseUrl } from '@/utils/Helpers';
 
-export const authClient: AuthClient = createClient({
+export const authClient = createClient({
   baseURL: getAuthBaseUrl(),
 });
 

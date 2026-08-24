@@ -14,7 +14,6 @@ export type { Auth, Session } from './server';
 
 // Export client-side authentication
 export { createClient } from './client';
-export type { AuthClient } from './client';
 
 // Export configuration
 export { getAuthConfig } from './config';

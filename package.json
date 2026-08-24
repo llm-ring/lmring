@@ -30,14 +30,14 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.7",
-    "@changesets/cli": "^2.31.1",
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
+    "@biomejs/biome": "^2.5.10",
+    "@changesets/cli": "^3.0.1",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
     "husky": "^9.1.7",
-    "knip": "^6.32.1",
+    "knip": "^6.32.2",
     "lint-staged": "^17.3.0",
-    "turbo": "^2.10.9"
+    "turbo": "^2.10.11"
   },
   "packageManager": "pnpm@10.34.0"
 }

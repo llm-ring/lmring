@@ -118,9 +118,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "framer-motion": "^13.1.0",
-    "lucide-react": "^1.31.0",
-    "react-resizable-panels": "^4.12.2",
+    "framer-motion": "^13.1.1",
+    "lucide-react": "^1.33.0",
+    "react-resizable-panels": "^4.12.3",
     "rehype-harden": "^1.1.8",
     "streamdown": "^2.5.0",
     "tailwind-merge": "^3.6.0"
@@ -135,11 +135,11 @@
     "@testing-library/react": "^16.3.2",
     "@tsdown/css": "0.22.14",
     "@types/react": "^19.2.18",
-    "@vitest/coverage-v8": "^4.1.10",
-    "happy-dom": "20.11.2",
+    "@vitest/coverage-v8": "^4.1.11",
+    "happy-dom": "20.11.6",
     "react": "^19.2.8",
     "tsdown": "0.22.14",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   }
 }

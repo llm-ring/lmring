@@ -383,7 +383,6 @@ describe('server', () => {
       });
 
       expect(mapped).toEqual({
-        id: '42',
         email: 'linuxdo_42@placeholder.local',
         name: 'Alice',
         image: 'https://linux.do/user_avatar/linux.do/{username}/200/xxx.png',
@@ -400,7 +399,6 @@ describe('server', () => {
       });
 
       expect(mapped).toEqual({
-        id: '7',
         email: 'linuxdo_7@placeholder.local',
         name: 'bob',
         image: undefined,
