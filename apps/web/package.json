@@ -30,7 +30,7 @@
     "@lmring/theme": "workspace:*",
     "@lmring/ui": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
-    "@lobehub/fluent-emoji": "^4.1.0",
+    "@lobehub/fluent-emoji": "^4.1.1",
     "@lobehub/icons": "^5.16.0",
     "@lobehub/ui": "^5.32.7",
     "@logtape/logtape": "^2.3.2",
