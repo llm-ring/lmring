@@ -37,7 +37,7 @@
     "husky": "^9.1.7",
     "knip": "^6.32.2",
     "lint-staged": "^17.3.0",
-    "turbo": "^2.10.11"
+    "turbo": "^2.10.12"
   },
   "packageManager": "pnpm@10.34.5"
 }
