@@ -136,7 +136,7 @@
     "@tsdown/css": "0.22.14",
     "@types/react": "^19.2.18",
     "@vitest/coverage-v8": "^4.1.11",
-    "happy-dom": "20.11.6",
+    "happy-dom": "20.11.8",
     "react": "^19.2.8",
     "tsdown": "0.22.14",
     "typescript": "^7.0.2",
