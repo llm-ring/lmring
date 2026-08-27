@@ -37,7 +37,7 @@
     "@sentry/nextjs": "^10.71.0",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.112.4",
-    "@tanstack/react-query": "^5.102.6",
+    "@tanstack/react-query": "^5.102.8",
     "@tanstack/react-table": "^9.2.3",
     "@vercel/sandbox": "^3.1.0",
     "ahooks": "^3.9.7",
