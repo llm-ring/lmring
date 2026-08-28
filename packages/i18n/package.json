@@ -23,11 +23,11 @@
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
-    "@testing-library/react": "^16.3.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^26.4.0",
     "@types/react": "^19.2.18",
     "@vitest/coverage-v8": "^4.1.11",
-    "happy-dom": "20.11.8",
+    "happy-dom": "20.11.12",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"
   }
