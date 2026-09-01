@@ -20,18 +20,18 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.46",
-    "@ai-sdk/azure": "^4.0.54",
+    "@ai-sdk/azure": "^4.0.56",
     "@ai-sdk/deepseek": "^3.0.37",
-    "@ai-sdk/google-vertex": "^5.0.70",
+    "@ai-sdk/google-vertex": "^5.0.71",
     "@ai-sdk/mistral": "^4.0.37",
-    "@ai-sdk/openai": "^4.0.52",
+    "@ai-sdk/openai": "^4.0.53",
     "@ai-sdk/openai-compatible": "^3.0.41",
     "@ai-sdk/provider": "^4.0.9",
     "@ai-sdk/xai": "^4.0.50",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
-    "ai": "^7.0.85",
+    "ai": "^7.0.87",
     "zod": "^4.5.4"
   },
   "devDependencies": {

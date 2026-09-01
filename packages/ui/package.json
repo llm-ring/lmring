@@ -119,7 +119,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "framer-motion": "^13.1.1",
-    "lucide-react": "^1.37.0",
+    "lucide-react": "^1.38.0",
     "react-resizable-panels": "^4.12.3",
     "rehype-harden": "^1.1.8",
     "streamdown": "^2.6.0",
