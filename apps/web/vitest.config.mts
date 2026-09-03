@@ -11,6 +11,9 @@ export default defineConfig({
       'framer-motion': path.resolve(__dirname, 'src/__mocks__/framer-motion.ts'),
       '@lmring/theme': path.resolve(__dirname, 'src/__mocks__/@lmring/theme.ts'),
       '@lmring/ui': path.resolve(__dirname, 'src/__mocks__/@lmring/ui.tsx'),
+      // @sentry/nextjs 10.72+ throws at module scope under happy-dom
+      // (getsentry/sentry-javascript#23789). Tests never need the real SDK.
+      '@sentry/nextjs': path.resolve(__dirname, 'src/__mocks__/@sentry/nextjs.ts'),
     },
   },
   test: {
