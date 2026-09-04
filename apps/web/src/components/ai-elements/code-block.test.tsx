@@ -225,9 +225,13 @@ describe('CodeBlock components', () => {
     const { rerender } = render(
       <CodeBlockContent code="first" language="typescript" theme="dark" />,
     );
-    await waitFor(() => expect(createHighlighter).toHaveBeenCalled());
+    await waitFor(() => {
+      expect(document.querySelector('pre')?.textContent).toContain('first');
+    });
     rerender(<CodeBlockContent code="second" language="typescript" theme="dark" />);
-    expect(document.querySelector('pre')).toBeTruthy();
+    await waitFor(() => {
+      expect(document.querySelector('pre')?.textContent).toContain('second');
+    });
   });
 
   it('does not re-copy while already in copied state', async () => {

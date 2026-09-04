@@ -20,26 +20,26 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.49",
-    "@ai-sdk/azure": "^4.0.60",
+    "@ai-sdk/azure": "^4.0.61",
     "@ai-sdk/deepseek": "^3.0.39",
     "@ai-sdk/google-vertex": "^5.0.75",
     "@ai-sdk/mistral": "^4.0.39",
-    "@ai-sdk/openai": "^4.0.57",
+    "@ai-sdk/openai": "^4.0.58",
     "@ai-sdk/openai-compatible": "^3.0.43",
     "@ai-sdk/provider": "^4.0.10",
     "@ai-sdk/xai": "^4.0.54",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
-    "ai": "^7.0.91",
+    "ai": "^7.0.92",
     "zod": "^4.5.4"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
     "@types/node": "^26.4.1",
-    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/coverage-v8": "^5.0.0",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.0"
   }
 }
