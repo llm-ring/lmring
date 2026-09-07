@@ -19,7 +19,7 @@
     "devDependencies": {
         "@lmring/typescript-config": "workspace:*",
         "@lmring/vitest-config": "workspace:*",
-        "@types/node": "^26.4.1",
+        "@types/node": "^26.5.0",
         "@vitest/coverage-v8": "5.0.0",
         "typescript": "^7.0.2",
         "vitest": "^5.0.0"
