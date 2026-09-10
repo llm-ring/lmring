@@ -18,16 +18,16 @@
     "react-i18next": "^17.0.13"
   },
   "peerDependencies": {
-    "react": "^19.2.8"
+    "react": "^19.3.0"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
     "@testing-library/react": "^16.3.3",
-    "@types/node": "^26.5.0",
-    "@types/react": "^19.2.18",
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
     "@vitest/coverage-v8": "^5.0.0",
-    "happy-dom": "20.14.0",
+    "happy-dom": "20.14.3",
     "typescript": "^7.0.2",
     "vitest": "^5.0.0"
   }
