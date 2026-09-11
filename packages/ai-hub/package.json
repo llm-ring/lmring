@@ -32,7 +32,7 @@
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
     "ai": "^7.0.97",
-    "zod": "^4.6.1"
+    "zod": "^4.6.2"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
