@@ -22,7 +22,7 @@
     "@ai-sdk/anthropic": "^4.0.53",
     "@ai-sdk/azure": "^4.0.70",
     "@ai-sdk/deepseek": "^3.0.44",
-    "@ai-sdk/google-vertex": "^5.0.80",
+    "@ai-sdk/google-vertex": "^5.0.81",
     "@ai-sdk/mistral": "^4.0.43",
     "@ai-sdk/openai": "^4.0.66",
     "@ai-sdk/openai-compatible": "^3.0.48",
@@ -31,7 +31,7 @@
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
     "@openrouter/ai-sdk-provider": "^3.0.0",
-    "ai": "^7.0.98",
+    "ai": "^7.0.99",
     "zod": "^4.6.2"
   },
   "devDependencies": {
