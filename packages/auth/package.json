@@ -32,7 +32,7 @@
     "@lmring/database": "workspace:*",
     "better-auth": "^1.7.4",
     "drizzle-orm": "^0.45.2",
-    "resend": "^6.27.0"
+    "resend": "^6.28.0"
   },
   "peerDependencies": {
     "react": "^19.3.0"
