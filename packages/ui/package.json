@@ -123,7 +123,7 @@
     "react-resizable-panels": "^4.12.4",
     "rehype-harden": "^1.1.8",
     "streamdown": "^2.6.0",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.7.0"
   },
   "peerDependencies": {
     "react": "^19.3.0"
