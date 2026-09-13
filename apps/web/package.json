@@ -51,7 +51,7 @@
     "posthog-js": "^1.430.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-i18next": "^17.0.13",
+    "react-i18next": "^17.0.14",
     "recharts": "^3.10.1",
     "shiki": "^4.4.3",
     "sonner": "^2.0.8",
