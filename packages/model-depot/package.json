@@ -21,7 +21,7 @@
     "./utils": "./src/utils/index.ts"
   },
   "dependencies": {
-    "zod": "^4.6.4"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",

@@ -32,7 +32,7 @@
     "@lmring/video-runtime": "workspace:*",
     "@lobehub/fluent-emoji": "^4.1.1",
     "@lobehub/icons": "^5.18.0",
-    "@lobehub/ui": "^5.44.0",
+    "@lobehub/ui": "^5.46.2",
     "@logtape/logtape": "^2.3.4",
     "@sentry/nextjs": "~10.74.0",
     "@supabase/ssr": "^0.12.7",
@@ -51,11 +51,11 @@
     "posthog-js": "^1.430.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-i18next": "^17.0.13",
+    "react-i18next": "^17.0.14",
     "recharts": "^3.10.1",
     "shiki": "^4.4.3",
     "sonner": "^2.0.8",
-    "zod": "^4.6.4",
+    "zod": "^4.6.5",
     "zustand": "5.0.15"
   },
   "devDependencies": {
