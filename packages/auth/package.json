@@ -32,7 +32,7 @@
     "@lmring/database": "workspace:*",
     "better-auth": "^1.7.5",
     "drizzle-orm": "^0.45.2",
-    "resend": "^6.28.0"
+    "resend": "^6.28.1"
   },
   "peerDependencies": {
     "react": "^19.3.0"
@@ -41,9 +41,9 @@
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
     "@types/react": "^19.3.0",
-    "@vitest/coverage-v8": "^5.0.0",
+    "@vitest/coverage-v8": "^5.0.1",
     "react": "^19.3.0",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   }
 }
