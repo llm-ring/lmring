@@ -118,7 +118,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
-    "framer-motion": "^13.3.0",
+    "framer-motion": "^13.4.0",
     "lucide-react": "^1.46.0",
     "react-resizable-panels": "^4.12.4",
     "rehype-harden": "^1.1.8",
