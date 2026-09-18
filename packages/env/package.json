@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.13.11",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.0",
     "find-up-simple": "^1.0.1",
     "zod": "^4.6.5"
   },
