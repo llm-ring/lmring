@@ -24,7 +24,7 @@
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
     "@testing-library/react": "^16.3.3",
-    "@types/node": "^26.6.1",
+    "@types/node": "^26.6.2",
     "@types/react": "^19.3.0",
     "@vitest/coverage-v8": "^5.0.1",
     "happy-dom": "20.14.5",
