@@ -30,7 +30,7 @@
     "@ai-sdk/xai": "^5.0.4",
     "@lmring/model-depot": "workspace:*",
     "@lmring/video-runtime": "workspace:*",
-    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "@openrouter/ai-sdk-provider": "^3.1.0",
     "ai": "^7.0.107",
     "zod": "^4.6.5"
   },
