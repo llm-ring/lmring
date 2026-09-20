@@ -73,10 +73,10 @@ importers:
         version: 4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@lobehub/icons':
         specifier: ^5.18.0
-        version: 5.18.0(@lobehub/ui@5.48.0)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: 5.18.0(@lobehub/ui@5.48.2)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@lobehub/ui':
-        specifier: ^5.48.0
-        version: 5.48.0(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^5.48.2
+        version: 5.48.2(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@logtape/logtape':
         specifier: ^2.3.6
         version: 2.3.6
@@ -2463,8 +2463,8 @@ packages:
       react: ^19.0.0
       react-dom: ^19.0.0
 
-  '@lobehub/ui@5.48.0':
-    resolution: {integrity: sha512-PrCrfaeGEgppo7HadK0B7nTytlLSHiZPdq1d50q+H0cd9zH2ePkarBo2Qqb9yHKSZZMjv8LTfQUUwX2z1/h1dA==}
+  '@lobehub/ui@5.48.2':
+    resolution: {integrity: sha512-CP2XoFRkyMPSemxmIpfK/GQdqxgPJqw2n/a8CeAOnDP/MdkVdyj4qgNfW3WH/zlNv/UWX2B3Rw9qJgepVlLuTQ==}
     engines: {node: '>=22.22.0'}
     peerDependencies:
       '@lobehub/fluent-emoji': ^4.0.0
@@ -11500,9 +11500,9 @@ snapshots:
       - antd
       - supports-color
 
-  '@lobehub/icons@5.18.0(@lobehub/ui@5.48.0)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@lobehub/icons@5.18.0(@lobehub/ui@5.48.2)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@lobehub/ui': 5.48.0(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@lobehub/ui': 5.48.2(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       antd: 6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       antd-style: 4.1.0(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       es-toolkit: 1.52.0
@@ -11534,7 +11534,7 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@lobehub/ui@5.48.0(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@lobehub/ui@5.48.2(@lobehub/fluent-emoji@4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@lobehub/icons@5.18.0)(@shikijs/themes@4.4.3)(@types/mdast@4.0.4)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(micromark-util-types@2.0.2)(micromark@4.0.2)(motion@12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@ant-design/cssinjs': 2.1.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@base-ui/react': 1.8.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -11548,7 +11548,7 @@ snapshots:
       '@floating-ui/react': 0.27.20(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@giscus/react': 3.1.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@lobehub/fluent-emoji': 4.1.1(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      '@lobehub/icons': 5.18.0(@lobehub/ui@5.48.0)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@lobehub/icons': 5.18.0(@lobehub/ui@5.48.2)(@types/react@19.3.0)(antd@6.1.2(luxon@3.7.2)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@lobehub/streamdown': 1.3.1(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@mdx-js/mdx': 3.1.1
       '@mdx-js/react': 3.1.1(@types/react@19.3.0)(react@19.3.0)
@@ -12634,7 +12634,7 @@ snapshots:
   '@rc-component/collapse@1.1.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
       react: 19.3.0
@@ -12656,7 +12656,7 @@ snapshots:
 
   '@rc-component/dialog@1.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/portal': 2.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
@@ -12665,7 +12665,7 @@ snapshots:
 
   '@rc-component/drawer@1.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/portal': 2.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
@@ -12690,7 +12690,7 @@ snapshots:
 
   '@rc-component/image@1.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/portal': 2.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
@@ -12725,7 +12725,7 @@ snapshots:
 
   '@rc-component/menu@1.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/overflow': 1.0.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/trigger': 3.10.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -12759,7 +12759,7 @@ snapshots:
 
   '@rc-component/notification@1.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
       react: 19.3.0
@@ -12838,7 +12838,7 @@ snapshots:
   '@rc-component/segmented@1.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
       react: 19.3.0
@@ -12889,7 +12889,7 @@ snapshots:
     dependencies:
       '@rc-component/dropdown': 1.0.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/menu': 1.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/resize-observer': 1.1.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
@@ -12933,7 +12933,7 @@ snapshots:
 
   '@rc-component/tree@1.1.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@rc-component/motion': 1.1.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@rc-component/motion': 1.3.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/util': 1.13.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@rc-component/virtual-list': 1.5.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       clsx: 2.1.1
