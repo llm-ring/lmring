@@ -396,7 +396,6 @@ export function createAuth(options: CreateAuthOptions) {
                   : undefined;
 
                 return {
-                  id: String(profile.id),
                   // Linux.do doesn't provide email - user must add after login
                   // Use a placeholder that will be detected and require completion
                   email: `linuxdo_${profile.id}@placeholder.local`,

@@ -37,7 +37,8 @@
       "preset": "recommended",
       "correctness": {
         "noUnusedVariables": "error",
-        "useExhaustiveDependencies": "warn"
+        "useExhaustiveDependencies": "warn",
+        "noComponentHookFactories": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off",
