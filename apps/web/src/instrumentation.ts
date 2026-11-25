@@ -5,9 +5,7 @@ const sentryOptions: Sentry.NodeOptions | Sentry.EdgeOptions = {
   dsn: env.NEXT_PUBLIC_SENTRY_DSN,
   spotlight: env.NODE_ENV === 'development',
   integrations: [Sentry.consoleLoggingIntegration()],
-  sendDefaultPii: true,
   tracesSampleRate: 1,
-  enableLogs: true,
   debug: false,
 };
 

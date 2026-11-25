@@ -123,7 +123,7 @@ describe('instrumentation-client', () => {
       );
     });
 
-    it('should configure sendDefaultPii and enableLogs', async () => {
+    it('should configure debug and sampling options', async () => {
       vi.doMock('@lmring/env', () => ({
         env: {
           NEXT_PUBLIC_SENTRY_DISABLED: 'false',
@@ -136,8 +136,7 @@ describe('instrumentation-client', () => {
 
       expect(mockSentryInit).toHaveBeenCalledWith(
         expect.objectContaining({
-          sendDefaultPii: true,
-          enableLogs: true,
+          tracesSampleRate: 1,
           debug: false,
         }),
       );
