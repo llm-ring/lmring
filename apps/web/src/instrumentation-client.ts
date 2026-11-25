@@ -11,11 +11,9 @@ if (!sentryDisabled) {
       Sentry.browserTracingIntegration(),
       ...(env.NODE_ENV === 'development' ? [Sentry.spotlightBrowserIntegration()] : []),
     ],
-    sendDefaultPii: true,
     tracesSampleRate: 1,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
-    enableLogs: true,
     debug: false,
   });
 }

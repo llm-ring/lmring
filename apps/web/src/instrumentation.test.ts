@@ -148,9 +148,7 @@ describe('instrumentation', () => {
         expect(mockSentryInit).toHaveBeenCalledWith(
           expect.objectContaining({
             dsn: 'https://sentry.example.com/123',
-            sendDefaultPii: true,
             tracesSampleRate: 1,
-            enableLogs: true,
             debug: false,
           }),
         );
