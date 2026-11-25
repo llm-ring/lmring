@@ -13,16 +13,16 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.13.11",
-    "dotenv": "^18.0.1",
+    "dotenv": "^18.0.10",
     "find-up-simple": "^1.0.1",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
-    "@types/node": "^26.6.2",
-    "@vitest/coverage-v8": "^5.0.1",
+    "@types/node": "^26.6.10",
+    "@vitest/coverage-v8": "^5.1.1",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.1.1"
   }
 }

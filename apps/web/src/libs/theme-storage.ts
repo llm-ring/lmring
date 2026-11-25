@@ -211,11 +211,11 @@ export function saveToLocal(config: PersistedThemeConfig, updatedAt?: string | n
 
 export function loadFromLocal(): PersistedThemeConfig | null {
   const value = themePersistStorage.getItem(THEME_STORAGE_KEY);
-  if (value instanceof Promise) {
+  if (value instanceof Promise || !value || !('state' in value)) {
     return null;
   }
 
-  return value?.state ?? null;
+  return value.state ?? null;
 }
 
 export function loadLocalThemeSnapshot(): ThemeConfigSnapshot | null {

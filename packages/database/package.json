@@ -16,17 +16,17 @@
   },
   "dependencies": {
     "@lmring/env": "workspace:*",
-    "drizzle-orm": "^0.45.2",
+    "drizzle-orm": "^0.45.4",
     "postgres": "^3.4.9"
   },
   "devDependencies": {
     "@lmring/typescript-config": "workspace:*",
     "@lmring/vitest-config": "workspace:*",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.10",
     "@types/pg": "^8.23.1",
-    "@vitest/coverage-v8": "^5.0.1",
-    "drizzle-kit": "^0.31.10",
+    "@vitest/coverage-v8": "^5.1.1",
+    "drizzle-kit": "^0.31.11",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.1.1"
   }
 }
