@@ -82,7 +82,20 @@
       "outputs": ["coverage/**"]
     },
     "test:e2e": {
-      "cache": false
+      "cache": false,
+      "passThroughEnv": [
+        "CI",
+        "PLAYWRIGHT_BASE_URL",
+        "PORT",
+        "DEPLOYMENT_MODE",
+        "NEXT_PUBLIC_DEPLOYMENT_MODE",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "DATABASE_URL",
+        "ENCRYPTION_KEY",
+        "NEXT_PUBLIC_APP_URL",
+        "NEXT_PUBLIC_SENTRY_DISABLED"
+      ]
     },
     "db:generate": {
       "cache": false
