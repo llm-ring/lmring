@@ -70,7 +70,7 @@ function buildActivityItems(
   status: SandboxStatus,
   files: Record<string, string>,
   error: string | null,
-  t: (key: string, options?: Record<string, unknown>) => string,
+  t: ReturnType<typeof useTranslation>['t'],
   workflowStatus?: string,
 ): ActivityLogItem[] {
   const items: ActivityLogItem[] = [];
