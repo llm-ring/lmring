@@ -48,12 +48,24 @@ function ToolbarButton({
 
 export function Toolbar({ viewMode, onViewModeChange, onRefresh }: ToolbarProps) {
   const [isSpinning, setIsSpinning] = React.useState(false);
+  const spinTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const { t } = useTranslation();
+
+  React.useEffect(() => {
+    return () => {
+      if (spinTimeoutRef.current !== null) {
+        clearTimeout(spinTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleRefresh = React.useCallback(() => {
     setIsSpinning(true);
     onRefresh();
-    setTimeout(() => setIsSpinning(false), 400);
+    if (spinTimeoutRef.current !== null) {
+      clearTimeout(spinTimeoutRef.current);
+    }
+    spinTimeoutRef.current = setTimeout(() => setIsSpinning(false), 400);
   }, [onRefresh]);
 
   const activeSandbox = useWebDevStore((s) => {
